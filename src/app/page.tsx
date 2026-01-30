@@ -246,132 +246,223 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT (black 60%) */}
-      <section id="contact" className="bg-[#0b0b0b]">
-        <div className="d4-container py-16 md:py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Get in Touch</h2>
+      <section id="contact" className="relative bg-[#0b0b0b]">
+        {/* subtle background accents */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-24 right-10 h-72 w-72 rounded-full bg-[color:var(--d4-yellow)]/10 blur-3xl" />
+          <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+        </div>
+
+        <div className="d4-container relative py-16 md:py-20">
+          {/* Header */}
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-semibold tracking-widest text-[color:var(--d4-yellow)]">
+              GET IN TOUCH
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              Let's build something great
+            </h2>
             <p className="mt-3 text-white/70">
-              Have a project in mind? We'd love to hear from you.
+              Have a project in mind? Send us details and we'll respond within{" "}
+              <span className="text-white font-semibold">24 hours</span>.
             </p>
           </div>
 
-          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-            {/* Left Column: Contact Info */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-lg font-semibold text-white">Contact Information</h3>
-                <p className="mt-2 text-white/70">
-                  Reach out through any of these channels — we typically respond within 24 hours.
+          {/* Grid */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-5">
+            {/* Left: Contact info */}
+            <div className="lg:col-span-2">
+              <div className="d4-card p-6 md:p-7">
+                <h3 className="text-base font-semibold text-white">
+                  Contact Information
+                </h3>
+                <p className="mt-2 text-sm text-white/70 leading-relaxed">
+                  Reach out through any channel — we typically respond within 24 hours.
                 </p>
-              </div>
 
-              <div className="space-y-6">
-                {/* Phone */}
-                <div className="d4-card p-5 rounded-xl">
-                  <p className="text-sm text-white/60 font-medium">Phone</p>
+                <div className="mt-6 grid gap-4">
+                  {/* Phone */}
                   <a
                     href="tel:+94726209171"
-                    className="mt-2 text-lg font-semibold text-[color:var(--d4-yellow)] hover:text-white/80 transition"
+                    className="group rounded-2xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
                   >
-                    +94 72 62 09 171
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--d4-yellow)]/15 ring-1 ring-[color:var(--d4-yellow)]/25">
+                        📞
+                      </span>
+                      <div>
+                        <div className="text-sm font-semibold text-white">Phone</div>
+                        <div className="mt-1 text-sm text-[color:var(--d4-yellow)] font-semibold">
+                          +94 72 62 09 171
+                        </div>
+                      </div>
+                    </div>
                   </a>
-                </div>
 
-                {/* Email */}
-                <div className="d4-card p-5 rounded-xl">
-                  <p className="text-sm text-white/60 font-medium">Email</p>
+                  {/* Email */}
                   <a
                     href="mailto:hello@delix4.com"
-                    className="mt-2 text-lg font-semibold text-[color:var(--d4-yellow)] hover:text-white/80 transition break-all"
+                    className="group rounded-2xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
                   >
-                    hello@delix4.com
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--d4-yellow)]/15 ring-1 ring-[color:var(--d4-yellow)]/25">
+                        ✉️
+                      </span>
+                      <div>
+                        <div className="text-sm font-semibold text-white">Email</div>
+                        <div className="mt-1 text-sm text-[color:var(--d4-yellow)] font-semibold">
+                          hello@delix4.com
+                        </div>
+                      </div>
+                    </div>
                   </a>
-                </div>
 
-                {/* Website */}
-                <div className="d4-card p-5 rounded-xl">
-                  <p className="text-sm text-white/60 font-medium">Website</p>
+                  {/* Website */}
                   <a
                     href="https://www.delix4.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-2 text-lg font-semibold text-[color:var(--d4-yellow)] hover:text-white/80 transition"
+                    className="group rounded-2xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
                   >
-                    www.delix4.com
+                    <div className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--d4-yellow)]/15 ring-1 ring-[color:var(--d4-yellow)]/25">
+                        🌐
+                      </span>
+                      <div>
+                        <div className="text-sm font-semibold text-white">Website</div>
+                        <div className="mt-1 text-sm text-[color:var(--d4-yellow)] font-semibold">
+                          www.delix4.com
+                        </div>
+                      </div>
+                    </div>
                   </a>
+                </div>
+
+                {/* Trust strip */}
+                <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-white/70">
+                    <div>
+                      ✅ Response time:{" "}
+                      <span className="text-white font-semibold">within 24 hours</span>
+                    </div>
+                    <div>
+                      ✅ Support:{" "}
+                      <span className="text-white font-semibold">Mon–Sat</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Contact Form */}
-            <div className="d4-card p-6 md:p-8 rounded-2xl">
-              <form onSubmit={handleSubmit} className="grid gap-4">
-                <div>
-                  <label className="text-sm text-white/75">First name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                    placeholder="First name"
-                    required
-                  />
-                </div>
+            {/* Right: Form */}
+            <div className="lg:col-span-3">
+              <div className="d4-card p-6 md:p-8">
+                <h3 className="text-base font-semibold text-white">
+                  Send us a message
+                </h3>
+                <p className="mt-2 text-sm text-white/70">
+                  Tell us what you need — we'll get back with next steps.
+                </p>
 
-                <div>
-                  <label className="text-sm text-white/75">Last name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                    placeholder="Last name"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm text-white/75">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                    placeholder="you@example.com"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm text-white/75">Message</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                    placeholder="Tell us about your project..."
-                    rows={4}
-                    required
-                  />
-                </div>
-
-                {feedback.message && (
-                  <div className={`rounded-lg px-4 py-3 text-sm ${feedback.type === "success" ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}>
-                    {feedback.message}
+                <form onSubmit={handleSubmit} className="mt-6 grid gap-4 md:grid-cols-2">
+                  <div className="md:col-span-1">
+                    <label className="text-xs font-semibold text-white/75">
+                      First name
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      className="d4-input mt-2 w-full px-4 py-3 outline-none focus:ring-2 focus:ring-[color:var(--d4-yellow)]/40"
+                      placeholder="First name"
+                      required
+                    />
                   </div>
-                )}
 
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full rounded-xl px-5 py-3 text-sm font-semibold bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? "Sending..." : "Send Message"}
-                </button>
-              </form>
+                  <div className="md:col-span-1">
+                    <label className="text-xs font-semibold text-white/75">
+                      Last name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      className="d4-input mt-2 w-full px-4 py-3 outline-none focus:ring-2 focus:ring-[color:var(--d4-yellow)]/40"
+                      placeholder="Last name"
+                      required
+                    />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label className="text-xs font-semibold text-white/75">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="d4-input mt-2 w-full px-4 py-3 outline-none focus:ring-2 focus:ring-[color:var(--d4-yellow)]/40"
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label className="text-xs font-semibold text-white/75">
+                      Message
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="d4-input mt-2 w-full px-4 py-3 outline-none focus:ring-2 focus:ring-[color:var(--d4-yellow)]/40"
+                      placeholder="Tell us about your project..."
+                      rows={6}
+                      required
+                    />
+                  </div>
+
+                  {feedback.message && (
+                    <div
+                      className={`md:col-span-2 rounded-xl px-4 py-3 text-sm border ${
+                        feedback.type === "success"
+                          ? "border-green-500/30 bg-green-500/10 text-green-200"
+                          : "border-red-500/30 bg-red-500/10 text-red-200"
+                      }`}
+                    >
+                      {feedback.message}
+                    </div>
+                  )}
+
+                  <div className="md:col-span-2">
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full rounded-xl px-5 py-3 text-sm font-semibold
+                      bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition
+                      disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {isLoading ? "Sending..." : "Send Message"}
+                    </button>
+
+                    <p className="mt-3 text-center text-xs text-white/55">
+                      Prefer email?{" "}
+                      <a
+                        className="text-white underline decoration-white/30 hover:decoration-white"
+                        href="mailto:hello@delix4.com"
+                      >
+                        hello@delix4.com
+                      </a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+
+              {/* Small note below form */}
+              <p className="mt-4 text-center text-xs text-white/45">
+                By submitting, you agree to be contacted by Delix4 regarding your request.
+              </p>
             </div>
           </div>
         </div>
