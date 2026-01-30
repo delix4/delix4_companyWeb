@@ -1,4 +1,63 @@
+"use client";
+
+import { useState } from "react";
+
 export default function HomePage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error" | "";
+    message: string;
+  }>({ type: "", message: "" });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setFeedback({ type: "", message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFeedback({
+          type: "success",
+          message: "Thank you! We'll get back to you soon.",
+        });
+        setFormData({ firstName: "", lastName: "", email: "", message: "" });
+      } else {
+        setFeedback({
+          type: "error",
+          message: data.error || "Something went wrong. Please try again.",
+        });
+      }
+    } catch (error) {
+      setFeedback({
+        type: "error",
+        message: "Failed to send message. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <main>
       {/* HERO / WELCOME */}
@@ -197,38 +256,72 @@ export default function HomePage() {
           </div>
 
           <div className="mx-auto mt-10 max-w-3xl d4-card p-6 md:p-8">
-            <form className="grid gap-4 md:grid-cols-2">
+            <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
               <div className="md:col-span-1">
                 <label className="text-sm text-white/75">First name</label>
-                <input className="d4-input mt-2 w-full px-4 py-3 outline-none" placeholder="First name" />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                  placeholder="First name"
+                  required
+                />
               </div>
 
               <div className="md:col-span-1">
                 <label className="text-sm text-white/75">Last name</label>
-                <input className="d4-input mt-2 w-full px-4 py-3 outline-none" placeholder="Last name" />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                  placeholder="Last name"
+                  required
+                />
               </div>
 
               <div className="md:col-span-2">
                 <label className="text-sm text-white/75">Email</label>
-                <input className="d4-input mt-2 w-full px-4 py-3 outline-none" placeholder="you@example.com" />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                  placeholder="you@example.com"
+                  required
+                />
               </div>
 
               <div className="md:col-span-2">
                 <label className="text-sm text-white/75">Message</label>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   className="d4-input mt-2 w-full px-4 py-3 outline-none"
                   placeholder="Tell us about your project..."
                   rows={5}
+                  required
                 />
               </div>
 
+              {feedback.message && (
+                <div className={`md:col-span-2 rounded-lg px-4 py-3 text-sm ${feedback.type === "success" ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}>
+                  {feedback.message}
+                </div>
+              )}
+
               <div className="md:col-span-2">
                 <button
-                  type="button"
-                  className="w-full rounded-xl px-5 py-3 text-sm font-semibold
-                  bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full rounded-xl px-5 py-3 text-sm font-semibold bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Let's talk
+                  {isLoading ? "Sending..." : "Let's talk"}
                 </button>
                 <p className="mt-3 text-center text-xs text-white/55">
                   Or email us directly:{" "}
