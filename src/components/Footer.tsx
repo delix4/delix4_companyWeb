@@ -1,51 +1,74 @@
-const Footer = () => {
+import Link from "next/link";
+
+export default function Footer() {
     return (
-        <footer className="bg-black text-white border-t border-yellow-400">
-            <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <footer className="mt-20 border-t border-white/10 bg-[#0b0b0b]">
+            <div className="d4-container py-12">
+                <div className="grid gap-10 md:grid-cols-3">
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-yellow-400">Delix4</h3>
-                        <p className="text-gray-300 text-sm">
-                            Providing innovative solutions for modern businesses. Connect with us to elevate your digital presence.
+                        <div className="text-lg font-semibold">
+                            <span className="text-white">Delix</span>
+                            <span className="text-[color:var(--d4-yellow)]">4</span>
+                        </div>
+                        <p className="mt-3 text-sm text-white/70 leading-relaxed">
+                            Innovating Digital Partnerships — we design and build modern web,
+                            mobile, and cloud solutions for growing businesses.
                         </p>
                     </div>
+
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-yellow-400">Quick Links</h3>
-                        <ul className="space-y-2">
-                            <li><a href="/#home" className="text-gray-300 hover:text-yellow-400 transition-colors">Home</a></li>
-                            <li><a href="/#services" className="text-gray-300 hover:text-yellow-400 transition-colors">Services</a></li>
-                            <li><a href="/#projects" className="text-gray-300 hover:text-yellow-400 transition-colors">Projects</a></li>
-                            <li><a href="/#contact" className="text-gray-300 hover:text-yellow-400 transition-colors">Contact</a></li>
-                        </ul>
+                        <div className="text-sm font-semibold text-white">Quick Links</div>
+                        <div className="mt-3 flex flex-col gap-2 text-sm">
+                            <Link className="text-white/70 hover:text-white" href="/#home">
+                                Home
+                            </Link>
+                            <Link className="text-white/70 hover:text-white" href="/#services">
+                                Services
+                            </Link>
+                            <Link className="text-white/70 hover:text-white" href="/#projects">
+                                Projects
+                            </Link>
+                            <Link className="text-white/70 hover:text-white" href="/#contact">
+                                Contact
+                            </Link>
+                        </div>
                     </div>
+
                     <div>
-                        <h3 className="text-lg font-semibold mb-4 text-yellow-400">Contact Us</h3>
-                        <p className="text-gray-300 text-sm">Email: hello@delix4.com</p>
-                        <p className="text-gray-300 text-sm">Phone: +94-72-62-09-171</p>
-                        <p className="text-gray-300 text-sm">Website: www.delix4.com</p>
-                        <div className="flex space-x-4 mt-4">
-                            {/* Social Media Icons Placeholders */}
-                            <a href="#" className="text-gray-300 hover:text-yellow-400">
-                                <span className="sr-only">Facebook</span>
-                                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-                                </svg>
-                            </a>
-                            <a href="#" className="text-gray-300 hover:text-yellow-400">
-                                <span className="sr-only">Twitter</span>
-                                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                                </svg>
-                            </a>
+                        <div className="text-sm font-semibold text-white">Contact Us</div>
+                        <div className="mt-3 space-y-2 text-sm text-white/70">
+                            <p>
+                                Email:{" "}
+                                <a className="text-white hover:underline" href="mailto:hello@delix4.com">
+                                    hello@delix4.com
+                                </a>
+                            </p>
+                            <p>
+                                Phone:{" "}
+                                <a className="text-white hover:underline" href="tel:+94726209171">
+                                    +94 72 62 09 171
+                                </a>
+                            </p>
+                            <p>
+                                Website:{" "}
+                                <a className="text-white hover:underline" href="https://www.delix4.com" target="_blank" rel="noreferrer">
+                                    www.delix4.com
+                                </a>
+                            </p>
+                        </div>
+
+                        <div className="mt-4 flex gap-3">
+                            {/* Keep icons later if you already had them; for now placeholders */}
+                            <span className="h-9 w-9 rounded-xl border border-white/10 bg-white/5" />
+                            <span className="h-9 w-9 rounded-xl border border-white/10 bg-white/5" />
                         </div>
                     </div>
                 </div>
-                <div className="mt-8 border-t border-yellow-400 pt-8 text-center">
-                    <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Delix4. All rights reserved.</p>
+
+                <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/55">
+                    © {new Date().getFullYear()} Delix4. All rights reserved.
                 </div>
             </div>
         </footer>
     );
-};
-
-export default Footer;
+}
