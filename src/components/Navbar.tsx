@@ -48,19 +48,16 @@ export default function Navbar() {
                     ))}
                     <Link
                         href="/#contact"
-                        className="ml-2 inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold
-              bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
+                        className="ml-2 inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
                     >
                         Let's Talk
                     </Link>
                 </nav>
 
-                {/* Mobile simple */}
                 <div className="md:hidden">
                     <Link
                         href="/#contact"
-                        className="inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold
-              bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
+                        className="inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
                     >
                         Contact
                     </Link>
