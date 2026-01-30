@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import fs from "fs";
+import path from "path";
 
 type Body = {
   firstName: string;
@@ -24,64 +25,46 @@ export async function POST(req: Request) {
     if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
         { error: "All fields are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!isValidEmail(email)) {
       return NextResponse.json(
         { error: "Please enter a valid email address." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // ✅ Use SMTP credentials from environment variables
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 587),
-      secure: process.env.SMTP_SECURE === "true", // true for 465, false for 587
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    const filePath = path.join(process.cwd(), "data", "contact-messages.json");
 
-    const toEmail = process.env.CONTACT_TO_EMAIL;
-
-    if (!toEmail) {
-      return NextResponse.json(
-        { error: "Server misconfigured: CONTACT_TO_EMAIL not set." },
-        { status: 500 }
-      );
+    // Ensure file exists
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      fs.writeFileSync(filePath, "[]", "utf8");
     }
 
-    const subject = `New Contact Message - Delix4 (${firstName} ${lastName})`;
+    const raw = fs.readFileSync(filePath, "utf8");
+    const existing = raw ? JSON.parse(raw) : [];
 
-    const text = `
-New contact form submission:
+    const newEntry = {
+      id: crypto.randomUUID(),
+      firstName,
+      lastName,
+      email,
+      message,
+      createdAt: new Date().toISOString(),
+    };
 
-Name: ${firstName} ${lastName}
-Email: ${email}
-
-Message:
-${message}
-`.trim();
-
-    // Send mail
-    await transporter.sendMail({
-      from: process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER,
-      to: toEmail,
-      replyTo: email,
-      subject,
-      text,
-    });
+    existing.unshift(newEntry);
+    fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), "utf8");
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (err) {
     console.error("Contact form error:", err);
     return NextResponse.json(
-      { error: "Failed to send message. Please try again." },
-      { status: 500 }
+      { error: "Failed to save message. Please try again." },
+      { status: 500 },
     );
   }
 }
