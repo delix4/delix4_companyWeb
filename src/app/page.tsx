@@ -248,89 +248,131 @@ export default function HomePage() {
       {/* CONTACT (black 60%) */}
       <section id="contact" className="bg-[#0b0b0b]">
         <div className="d4-container py-16 md:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Contact Us</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold md:text-4xl">Get in Touch</h2>
             <p className="mt-3 text-white/70">
-              Send us a message — we'll respond as soon as possible.
+              Have a project in mind? We'd love to hear from you.
             </p>
           </div>
 
-          <div className="mx-auto mt-10 max-w-3xl d4-card p-6 md:p-8">
-            <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
-              <div className="md:col-span-1">
-                <label className="text-sm text-white/75">First name</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                  placeholder="First name"
-                  required
-                />
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+            {/* Left Column: Contact Info */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-lg font-semibold text-white">Contact Information</h3>
+                <p className="mt-2 text-white/70">
+                  Reach out through any of these channels — we typically respond within 24 hours.
+                </p>
               </div>
 
-              <div className="md:col-span-1">
-                <label className="text-sm text-white/75">Last name</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                  placeholder="Last name"
-                  required
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="text-sm text-white/75">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
-
-              <div className="md:col-span-2">
-                <label className="text-sm text-white/75">Message</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="d4-input mt-2 w-full px-4 py-3 outline-none"
-                  placeholder="Tell us about your project..."
-                  rows={5}
-                  required
-                />
-              </div>
-
-              {feedback.message && (
-                <div className={`md:col-span-2 rounded-lg px-4 py-3 text-sm ${feedback.type === "success" ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}>
-                  {feedback.message}
+              <div className="space-y-6">
+                {/* Phone */}
+                <div className="d4-card p-5 rounded-xl">
+                  <p className="text-sm text-white/60 font-medium">Phone</p>
+                  <a
+                    href="tel:+94726209171"
+                    className="mt-2 text-lg font-semibold text-[color:var(--d4-yellow)] hover:text-white/80 transition"
+                  >
+                    +94 72 62 09 171
+                  </a>
                 </div>
-              )}
 
-              <div className="md:col-span-2">
+                {/* Email */}
+                <div className="d4-card p-5 rounded-xl">
+                  <p className="text-sm text-white/60 font-medium">Email</p>
+                  <a
+                    href="mailto:hello@delix4.com"
+                    className="mt-2 text-lg font-semibold text-[color:var(--d4-yellow)] hover:text-white/80 transition break-all"
+                  >
+                    hello@delix4.com
+                  </a>
+                </div>
+
+                {/* Website */}
+                <div className="d4-card p-5 rounded-xl">
+                  <p className="text-sm text-white/60 font-medium">Website</p>
+                  <a
+                    href="https://www.delix4.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 text-lg font-semibold text-[color:var(--d4-yellow)] hover:text-white/80 transition"
+                  >
+                    www.delix4.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Contact Form */}
+            <div className="d4-card p-6 md:p-8 rounded-2xl">
+              <form onSubmit={handleSubmit} className="grid gap-4">
+                <div>
+                  <label className="text-sm text-white/75">First name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                    placeholder="First name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm text-white/75">Last name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                    placeholder="Last name"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm text-white/75">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm text-white/75">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="d4-input mt-2 w-full px-4 py-3 outline-none"
+                    placeholder="Tell us about your project..."
+                    rows={4}
+                    required
+                  />
+                </div>
+
+                {feedback.message && (
+                  <div className={`rounded-lg px-4 py-3 text-sm ${feedback.type === "success" ? "bg-green-500/20 text-green-300" : "bg-red-500/20 text-red-300"}`}>
+                    {feedback.message}
+                  </div>
+                )}
+
                 <button
                   type="submit"
                   disabled={isLoading}
                   className="w-full rounded-xl px-5 py-3 text-sm font-semibold bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? "Sending..." : "Let's talk"}
+                  {isLoading ? "Sending..." : "Send Message"}
                 </button>
-                <p className="mt-3 text-center text-xs text-white/55">
-                  Or email us directly:{" "}
-                  <a className="text-white underline decoration-white/30 hover:decoration-white" href="mailto:hello@delix4.com">
-                    hello@delix4.com
-                  </a>
-                </p>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </section>
