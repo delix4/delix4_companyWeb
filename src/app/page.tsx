@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "@/components/Reveal";
+import FloatingGlow from "@/components/FloatingGlow";
 
 export default function HomePage() {
   const [formData, setFormData] = useState({
@@ -63,40 +65,48 @@ export default function HomePage() {
       {/* HERO / WELCOME */}
       <section id="home" className="relative overflow-hidden">
         {/* subtle yellow glow */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[color:var(--d4-yellow)]/20 blur-3xl" />
+        <FloatingGlow />
         <div className="d4-container py-20 md:py-28">
           <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
-              <span className="h-2 w-2 rounded-full bg-[color:var(--d4-yellow)]" />
-              Innovating Digital Partnerships
-            </p>
+            <Reveal>
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/75">
+                <span className="h-2 w-2 rounded-full bg-[color:var(--d4-yellow)]" />
+                Innovating Digital Partnerships
+              </p>
+            </Reveal>
 
-            <h1 className="mt-5 text-4xl font-extrabold tracking-tight md:text-6xl">
-              Welcome to{" "}
-              <span className="text-[color:var(--d4-yellow)]">Delix4</span>
-            </h1>
+            <Reveal delay={0.08}>
+              <h1 className="mt-5 text-4xl font-extrabold tracking-tight md:text-6xl">
+                Welcome to{" "}
+                <span className="text-[color:var(--d4-yellow)]">Delix4</span>
+              </h1>
+            </Reveal>
 
-            <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
-              We build modern websites, mobile apps, and scalable digital systems
-              that help businesses grow — fast, secure, and future-ready.
-            </p>
+            <Reveal delay={0.16}>
+              <p className="mt-5 text-base leading-relaxed text-white/70 md:text-lg">
+                We build modern websites, mobile apps, and scalable digital systems
+                that help businesses grow — fast, secure, and future-ready.
+              </p>
+            </Reveal>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold
-                bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
-              >
-                Get Started
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold
-                border border-white/15 bg-white/5 text-white hover:bg-white/10 transition"
-              >
-                Contact Us
-              </a>
-            </div>
+            <Reveal delay={0.24}>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#services"
+                  className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold
+                  bg-[color:var(--d4-yellow)] text-black hover:brightness-95 transition"
+                >
+                  Get Started
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold
+                  border border-white/15 bg-white/5 text-white hover:bg-white/10 transition"
+                >
+                  Contact Us
+                </a>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -113,29 +123,35 @@ export default function HomePage() {
           </p>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold">Expert Team</h3>
-              <p className="mt-2 text-sm text-black/70">
-                Experienced developers and designers delivering high-quality
-                results with clean architecture.
-              </p>
-            </div>
+            <Reveal delay={0.05}>
+              <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-transform duration-200 hover:-translate-y-1">
+                <h3 className="text-lg font-semibold">Expert Team</h3>
+                <p className="mt-2 text-sm text-black/70">
+                  Experienced developers and designers delivering high-quality
+                  results with clean architecture.
+                </p>
+              </div>
+            </Reveal>
 
-            <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold">Innovative Solutions</h3>
-              <p className="mt-2 text-sm text-black/70">
-                We stay ahead with modern technologies to solve complex problems
-                and scale smoothly.
-              </p>
-            </div>
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-transform duration-200 hover:-translate-y-1">
+                <h3 className="text-lg font-semibold">Innovative Solutions</h3>
+                <p className="mt-2 text-sm text-black/70">
+                  We stay ahead with modern technologies to solve complex problems
+                  and scale smoothly.
+                </p>
+              </div>
+            </Reveal>
 
-            <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold">Customer Centric</h3>
-              <p className="mt-2 text-sm text-black/70">
-                Clear communication, transparent delivery, and long-term support
-                that keeps you confident.
-              </p>
-            </div>
+            <Reveal delay={0.15}>
+              <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm transition-transform duration-200 hover:-translate-y-1">
+                <h3 className="text-lg font-semibold">Customer Centric</h3>
+                <p className="mt-2 text-sm text-black/70">
+                  Clear communication, transparent delivery, and long-term support
+                  that keeps you confident.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -173,18 +189,20 @@ export default function HomePage() {
                 title: "Cloud & Deployment",
                 desc: "Secure hosting, CI/CD, and production deployment on AWS, VPS, or modern platforms.",
               },
-            ].map((s) => (
-              <div key={s.title} className="d4-card p-6">
-                <div className="flex items-start gap-4">
-                  <div className="h-11 w-11 rounded-2xl bg-[color:var(--d4-yellow)]/15 ring-1 ring-[color:var(--d4-yellow)]/25" />
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{s.title}</h3>
-                    <p className="mt-2 text-sm text-white/70 leading-relaxed">
-                      {s.desc}
-                    </p>
+            ].map((s, i) => (
+              <Reveal key={s.title} delay={i * 0.06}>
+                <div className="d4-card p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-white/20">
+                  <div className="flex items-start gap-4">
+                    <div className="h-11 w-11 rounded-2xl bg-[color:var(--d4-yellow)]/15 ring-1 ring-[color:var(--d4-yellow)]/25" />
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{s.title}</h3>
+                      <p className="mt-2 text-sm text-white/70 leading-relaxed">
+                        {s.desc}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -227,19 +245,21 @@ export default function HomePage() {
                 title: "Corporate Portfolio",
                 desc: "High-converting business website with CMS-ready content structure.",
               },
-            ].map((p) => (
-              <div key={p.title} className="rounded-2xl bg-white p-6 shadow-sm border border-black/10">
-                <p className="text-xs font-semibold text-black/60">{p.tag}</p>
-                <h3 className="mt-2 text-xl font-extrabold">{p.title}</h3>
-                <p className="mt-2 text-sm text-black/70">{p.desc}</p>
+            ].map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.06}>
+                <div className="rounded-2xl bg-white p-6 shadow-sm border border-black/10 transition-transform duration-200 hover:-translate-y-1">
+                  <p className="text-xs font-semibold text-black/60">{p.tag}</p>
+                  <h3 className="mt-2 text-xl font-extrabold">{p.title}</h3>
+                  <p className="mt-2 text-sm text-black/70">{p.desc}</p>
 
-                <a
-                  href="#contact"
-                  className="mt-4 inline-flex text-sm font-semibold text-black underline decoration-black/30 hover:decoration-black"
-                >
-                  Request Similar Project
-                </a>
-              </div>
+                  <a
+                    href="#contact"
+                    className="mt-4 inline-flex text-sm font-semibold text-black underline decoration-black/30 hover:decoration-black"
+                  >
+                    Request Similar Project
+                  </a>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
