@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, ChevronDown, Plus, Minus } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, ChevronDown, Plus, Minus } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 const faqs = [
@@ -97,13 +97,15 @@ export default function ContactPage() {
                             <div className="flex gap-4">
                                 {/* Social Buttons */}
                                 {[
-                                    { icon: Facebook, label: 'Facebook', href: '#' },
-                                    { icon: Twitter, label: 'Twitter', href: '#' },
-                                    { icon: Linkedin, label: 'LinkedIn', href: '#' }
+                                    { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61587168062633' },
+                                    { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/delix4_?igsh=NDAxOXlzdjJyZG15' },
+                                    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/delix4' }
                                 ].map((social, idx) => (
                                     <a
                                         key={idx}
                                         href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         className="w-14 h-14 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 hover:border-primary/50 hover:scale-110 transition-all duration-300"
                                     >
                                         <social.icon className="h-6 w-6" />
