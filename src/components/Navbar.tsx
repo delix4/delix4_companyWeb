@@ -44,11 +44,11 @@ const Navbar = () => {
                     <div className="flex items-center flex-shrink-0">
                         <Link href="/" className="flex items-center gap-2">
                             <Image
-                                src="/logo.jpg"
+                                src="/logo.png"
                                 alt="Delix4 Logo"
-                                width={200}
-                                height={80}
-                                className="h-24 w-auto object-contain rounded-md bg-white p-1"
+                                width={560}
+                                height={260}
+                                className="h-64 w-auto object-contain"
                                 priority
                             />
                         </Link>
