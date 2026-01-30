@@ -10,7 +10,7 @@ const Footer = () => {
                     <div className="col-span-1 md:col-span-1 flex flex-col items-start">
                         <div className="mb-6 -ml-2">
                             <Image
-                                src="/logo3.png"
+                                src="/logo.png"
                                 alt="Delix4 Logo"
                                 width={280}
                                 height={130}

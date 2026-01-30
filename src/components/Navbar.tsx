@@ -44,7 +44,7 @@ const Navbar = () => {
                     <div className="flex items-center flex-shrink-0">
                         <Link href="/" className="flex items-center gap-2">
                             <Image
-                                src="/logo3.png"
+                                src="/logo.png"
                                 alt="Delix4 Logo"
                                 width={350}
                                 height={163}

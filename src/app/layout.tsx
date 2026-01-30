@@ -19,6 +19,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Delix4 - Innovative Solutions",
   description: "Innovative solutions for modern businesses.",
+  icons: {
+    icon: [
+      { url: "/tablogo.png", sizes: "192x192", type: "image/png" },
+      { url: "/tablogo.png", sizes: "32x32", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
