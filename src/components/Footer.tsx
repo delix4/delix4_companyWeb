@@ -34,8 +34,8 @@ const Footer = () => {
                     <div className="flex flex-col min-w-0">
                         <h3 className="text-lg font-bold mb-6 text-white tracking-wide">Contact</h3>
                         <div className="space-y-4">
-                            <p className="text-gray-400 text-sm">Email: <span className="text-white block mt-1">hello@delix4.com</span></p>
-                            <p className="text-gray-400 text-sm">Phone: <span className="text-white block mt-1">+94-72-62-09-171</span></p>
+                            <p className="text-gray-400 text-sm">Email: <a href="mailto:hello@delix4.com" className="text-white block mt-1 hover:text-primary transition-colors">hello@delix4.com</a></p>
+                            <p className="text-gray-400 text-sm">Phone: <a href="tel:+94-72-62-09-171" className="text-white block mt-1 hover:text-primary transition-colors">+94-72-62-09-171</a></p>
                         </div>
                     </div>
                     <div className="flex flex-col min-w-0">

@@ -67,7 +67,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-400 mb-1">Phone</p>
-                                        <p className="text-lg text-white font-medium">+94-776309171</p>
+                                        <a href="tel:+94-776309171" className="text-lg text-white font-medium hover:text-primary transition-colors">+94-776309171</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start group">
@@ -76,7 +76,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <p className="text-sm text-gray-400 mb-1">Email</p>
-                                        <p className="text-lg text-white font-medium">hello@delix4.com</p>
+                                        <a href="mailto:hello@delix4.com" className="text-lg text-white font-medium hover:text-primary transition-colors">hello@delix4.com</a>
                                     </div>
                                 </div>
                                 <div className="flex items-start group">
