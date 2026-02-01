@@ -64,13 +64,13 @@ export default function CareersPage() {
                     className="text-center mb-24"
                 >
                     <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-sm font-medium mb-6">
-                        We're Hiring
+                        We&apos;re Hiring
                     </div>
                     <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
                         Join the <span className="text-primary">Revolution</span>
                     </h1>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        We're on a mission to redefine digital excellence. If you're passionate, innovative, and ready to make an impact, we want you on our team.
+                        We&apos;re on a mission to redefine digital excellence. If you&apos;re passionate, innovative, and ready to make an impact, we want you on our team.
                     </p>
                 </motion.div>
 

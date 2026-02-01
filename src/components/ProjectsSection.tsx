@@ -74,7 +74,7 @@ export default function ProjectsSection() {
                         <span className="text-primary">Featured</span> Projects
                     </h3>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        Discover how we've helped businesses transform their digital presence with cutting-edge technology and design.
+                        Discover how we&apos;ve helped businesses transform their digital presence with cutting-edge technology and design.
                     </p>
                 </motion.div>
 
@@ -85,8 +85,8 @@ export default function ProjectsSection() {
                             key={category}
                             onClick={() => setActiveCategory(category)}
                             className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                                    ? "bg-primary text-black shadow-lg shadow-primary/20 scale-105"
-                                    : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
+                                ? "bg-primary text-black shadow-lg shadow-primary/20 scale-105"
+                                : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
                                 }`}
                         >
                             {category}

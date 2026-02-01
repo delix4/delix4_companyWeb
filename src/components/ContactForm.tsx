@@ -93,7 +93,7 @@ export default function ContactForm() {
                 </div>
 
                 {status === 'success' && (
-                    <p className="text-green-500 text-sm">Message sent successfully! We'll get back to you soon.</p>
+                    <p className="text-green-500 text-sm">Message sent successfully! We&apos;ll get back to you soon.</p>
                 )}
                 {status === 'error' && (
                     <p className="text-red-500 text-sm">Failed to send message. Please try again.</p>

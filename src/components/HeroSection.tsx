@@ -135,7 +135,7 @@ export default function HeroSection() {
                             </div>
                             <div className="space-y-2 font-mono text-xs text-gray-400">
                                 <div className="flex"><span className="text-purple-400 mr-2">function</span><span className="text-yellow-300">optimize</span>() <span className="text-gray-500">{`{`}</span></div>
-                                <div className="pl-4"><span className="text-blue-400">return</span> <span className="text-green-400">"Efficiency"</span>;</div>
+                                <div className="pl-4"><span className="text-blue-400">return</span> <span className="text-green-400">&quot;Efficiency&quot;</span>;</div>
                                 <div className="text-gray-500">{`}`}</div>
                             </div>
                         </motion.div>

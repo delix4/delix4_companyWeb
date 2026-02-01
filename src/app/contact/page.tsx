@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, ChevronDown, Plus, Minus } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Plus, Minus } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 const faqs = [
@@ -42,10 +42,10 @@ export default function ContactPage() {
                     className="text-center mb-16"
                 >
                     <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Let's Build Something <span className="text-primary">Amazing</span>
+                        Let&apos;s Build Something <span className="text-primary">Amazing</span>
                     </h1>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        Have a project in mind? We'd love to hear about it. Reach out to us and we'll get back to you within 24 hours.
+                        Have a project in mind? We&apos;d love to hear about it. Reach out to us and we&apos;ll get back to you within 24 hours.
                     </p>
                 </motion.div>
 

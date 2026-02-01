@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, Code, Smartphone, BarChart, Zap, CheckCircle, Mail, Phone } from "lucide-react";
+import { Code, Smartphone, BarChart, Zap, CheckCircle, Mail, Phone } from "lucide-react";
 import ProjectsSection from "@/components/ProjectsSection";
 import HeroSection from "@/components/HeroSection";
 import TechStack from "@/components/TechStack";
@@ -95,7 +93,7 @@ export default function Home() {
                     <Zap className="h-8 w-8 text-primary" />
                   </div>
                   <h3 className="text-3xl font-bold text-white mb-4">Lightning Fast Delivery</h3>
-                  <p className="text-gray-400 text-lg">We don't just build; we launch. Our streamlined agile workflow ensuring your project goes from concept to market in record time without compromising quality.</p>
+                  <p className="text-gray-400 text-lg">We don&apos;t just build; we launch. Our streamlined agile workflow ensuring your project goes from concept to market in record time without compromising quality.</p>
                 </div>
                 <div className="mt-8">
                   <div className="flex -space-x-4">
