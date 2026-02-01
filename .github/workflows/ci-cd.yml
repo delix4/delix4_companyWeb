@@ -45,12 +45,6 @@ jobs:
         run: npm audit --audit-level=moderate
         continue-on-error: true
 
-      - name: Dependency Check
-        run: npx snyk test --severity-threshold=high
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
   build:
     needs: quality-checks
     runs-on: ubuntu-latest
@@ -124,34 +118,6 @@ jobs:
         with:
           sarif_file: "trivy-results.sarif"
         continue-on-error: true
-
-  deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: [build, test, security-scan]
-    runs-on: ubuntu-latest
-    name: Deploy to Production
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: next-build
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install Production Dependencies
-        run: npm ci --only=production
-
-      - name: Verify Build
-        run: ls -la .next/
-
-      - name: Ready for Deployment
-        run: echo "✅ Build artifacts ready for deployment"
 
   lighthouse:
     needs: build

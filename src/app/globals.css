@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --primary: #FFD700;
+  --primary: #ffd700;
   --primary-foreground: #000000;
   --secondary: #1f2937;
   --secondary-foreground: #ffffff;
@@ -73,7 +73,6 @@ html {
 }
 
 @keyframes gradient-x {
-
   0%,
   100% {
     background-size: 200% 200%;
