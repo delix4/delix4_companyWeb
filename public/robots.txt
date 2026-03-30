@@ -1,0 +1,30 @@
+# Robots.txt for Delix4 Website
+# This file helps search engines navigate and understand the content of the website
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /.next/
+Disallow: /node_modules/
+Disallow: /*?*
+Crawl-delay: 1
+
+# Specific rules for common search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Disallow bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://delix4.com/sitemap.xml

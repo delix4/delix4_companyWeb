@@ -89,9 +89,9 @@ export default function ProjectsSection() {
           <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
             <span className="text-primary">Featured</span> Projects
           </h3>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Discover how we&apos;ve helped businesses transform their digital presence with
-            cutting-edge technology and design.
+            cutting-edge technology and innovative design.
           </p>
         </motion.div>
 

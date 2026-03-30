@@ -41,9 +41,10 @@ export default function Home() {
             variants={fadeInUp}
           >
             <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">
-              Our Capabilities
+              What We Offer
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white">Engineering Excellence</h3>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Services & Capabilities</h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">Comprehensive solutions designed to drive your business forward with cutting-edge technology and innovation.</p>
           </motion.div>
 
           <motion.div
@@ -84,7 +85,7 @@ export default function Home() {
                   <service.icon className="h-7 w-7" />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-3">{service.title}</h4>
-                <p className="text-gray-400">{service.desc}</p>
+                <p className="text-gray-400 leading-relaxed">{service.desc}</p>
               </motion.div>
             ))}
           </motion.div>
