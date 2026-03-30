@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
@@ -48,8 +48,13 @@ export const metadata: Metadata = {
       { url: '/tablogo.png', sizes: '32x32', type: 'image/png' },
     ],
   },
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
   robots: 'index, follow',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
