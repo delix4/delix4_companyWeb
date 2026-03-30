@@ -59,11 +59,21 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="mailto:hello@delix4.com"
                   className="text-gray-400 hover:text-primary transition-colors text-sm"
+                  aria-label="Email Delix4"
                 >
-                  Contact
+                  Email Us
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="tel:+94-776309171"
+                  className="text-gray-400 hover:text-primary transition-colors text-sm"
+                  aria-label="Call Delix4"
+                >
+                  Call Us
+                </a>
               </li>
             </ul>
           </div>
@@ -75,6 +85,7 @@ const Footer = () => {
                 <a
                   href="mailto:hello@delix4.com"
                   className="text-white block mt-1 hover:text-primary transition-colors"
+                  aria-label="Email address: hello@delix4.com"
                 >
                   hello@delix4.com
                 </a>
@@ -82,10 +93,11 @@ const Footer = () => {
               <p className="text-gray-400 text-sm">
                 Phone:{' '}
                 <a
-                  href="tel:+94-72-62-09-171"
+                  href="tel:+94-776309171"
                   className="text-white block mt-1 hover:text-primary transition-colors"
+                  aria-label="Phone number: +94-776309171"
                 >
-                  +94-72-62-09-171
+                  +94-776309171
                 </a>
               </p>
             </div>

@@ -29,12 +29,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: 'Home', href: '/#home' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Services', href: '/#services' },
-    { name: 'Why Us', href: '/#why-us' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Home', href: '/#home', ariaLabel: 'Navigate to home section' },
+    { name: 'Projects', href: '/projects', ariaLabel: 'View our portfolio of projects' },
+    { name: 'Services', href: '/#services', ariaLabel: 'View our services and capabilities' },
+    { name: 'Why Us', href: '/#why-us', ariaLabel: 'Learn why choose us' },
+    { name: 'Careers', href: '/careers', ariaLabel: 'View career opportunities' },
+    { name: 'Contact', href: '/contact', ariaLabel: 'Get in touch with us' },
   ];
 
   return (
@@ -61,6 +61,8 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
+                  title={link.ariaLabel}
+                  aria-label={link.ariaLabel}
                   className="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
                 >
                   {link.name}
@@ -83,7 +85,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +97,8 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                aria-label={link.ariaLabel}
+                className="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors"
                 onClick={toggleMenu}
               >
                 {link.name}
@@ -104,7 +106,6 @@ const Navbar = () => {
             ))}
           </div>
         </motion.div>
-      )}
     </nav>
   );
 };

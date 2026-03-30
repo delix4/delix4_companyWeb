@@ -60,14 +60,14 @@ export default function HeroSection() {
 
             {/* Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
             >
               <Link
                 href="/projects"
-                className="group relative px-8 py-4 bg-primary text-black font-bold rounded-full overflow-hidden flex items-center justify-center transition-transform hover:scale-105"
+                className="group relative px-8 py-4 bg-primary text-black font-bold rounded-full overflow-hidden flex items-center justify-center transition-all hover:shadow-lg hover:shadow-primary/20 hover:scale-105 active:scale-95"
               >
                 <span className="relative z-10 flex items-center">
                   View Our Work{' '}
@@ -77,7 +77,7 @@ export default function HeroSection() {
 
               <Link
                 href="/contact"
-                className="group px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white/10 transition-all flex items-center justify-center"
+                className="group px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-primary/50 transition-all flex items-center justify-center hover:shadow-lg hover:shadow-primary/10 active:scale-95"
               >
                 Get a Quote{' '}
                 <Sparkles className="ml-2 h-4 w-4 text-yellow-400 group-hover:rotate-12 transition-transform" />

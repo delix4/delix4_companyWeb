@@ -17,14 +17,39 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Delix4 - Innovative Solutions',
-  description: 'Innovative solutions for modern businesses.',
+  title: 'Delix4 - Web Development, Mobile Apps & Digital Solutions',
+  description: 'Transform your business with innovative web development, mobile applications, and digital marketing solutions. Expert tech strategy and digital transformation services.',
+  keywords: 'web development, mobile apps, digital marketing, software development, digital transformation, tech consulting, Next.js, React',
+  authors: [{ name: 'Delix4' }],
+  creator: 'Delix4',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://delix4.com',
+    title: 'Delix4 - Innovative Digital Solutions for Modern Businesses',
+    description: 'Transform your business with cutting-edge web development, mobile apps, and digital marketing solutions.',
+    images: [
+      {
+        url: 'https://delix4.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Delix4 - Digital Solutions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Delix4 - Innovative Digital Solutions',
+    description: 'Transform your business with web development, mobile apps & digital marketing',
+  },
   icons: {
     icon: [
       { url: '/tablogo.png', sizes: '192x192', type: 'image/png' },
       { url: '/tablogo.png', sizes: '32x32', type: 'image/png' },
     ],
   },
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
+  robots: 'index, follow',
 };
 
 export default function RootLayout({

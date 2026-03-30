@@ -20,12 +20,22 @@ const techs = [
 
 export default function TechStack() {
   return (
-    <div className="py-10 bg-black border-y border-white/5 relative overflow-hidden">
+    <div className="py-12 bg-black border-y border-white/5 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center text-gray-400 text-sm font-semibold mb-8 uppercase tracking-wide"
+        >
+          Tech Stack &amp; Technologies
+        </motion.h2>
+      </div>
       <div className="absolute inset-0 bg-black/50 z-10 pointer-events-none bg-gradient-to-r from-black via-transparent to-black"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-0">
         <motion.div
-          className="flex gap-16 w-max"
+          className="flex gap-8 sm:gap-16 w-max"
           animate={{ x: '-50%' }}
           transition={{
             duration: 30,
@@ -37,10 +47,10 @@ export default function TechStack() {
           {[...techs, ...techs].map((tech, index) => (
             <div
               key={index}
-              className="flex items-center space-x-3 text-gray-500 hover:text-primary transition-colors cursor-default group"
+              className="flex items-center space-x-3 text-gray-500 hover:text-primary transition-colors cursor-default group whitespace-nowrap"
             >
-              <tech.icon className="h-6 w-6 group-hover:scale-110 transition-transform" />
-              <span className="text-lg font-semibold tracking-tight">{tech.name}</span>
+              <tech.icon className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform flex-shrink-0" />
+              <span className="text-base sm:text-lg font-semibold tracking-tight">{tech.name}</span>
             </div>
           ))}
         </motion.div>
