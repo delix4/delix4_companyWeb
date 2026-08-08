@@ -1,15 +1,20 @@
 "use client";
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import Image from 'next/image';
 
+const sectionIds = ['home', 'projects', 'services', 'why-us', 'contact'];
+
 const Navbar = () => {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('home');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,18 +29,46 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    useEffect(() => {
+        if (pathname !== '/') return;
+
+        const sections = sectionIds
+            .map((id) => document.getElementById(id))
+            .filter((el): el is HTMLElement => el !== null);
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '-40% 0px -55% 0px' }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+        return () => observer.disconnect();
+    }, [pathname]);
+
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
     const navLinks = [
         { name: 'Home', href: '/#home' },
-        { name: 'Projects', href: '/projects' },
+        { name: 'Projects', href: '/#projects' },
         { name: 'Services', href: '/#services' },
         { name: 'Why Us', href: '/#why-us' },
         { name: 'Careers', href: '/careers' },
-        { name: 'Contact', href: '/contact' },
+        { name: 'Contact', href: '/#contact' },
     ];
+
+    const isLinkActive = (href: string) => {
+        if (href === '/careers') return pathname === '/careers';
+        if (pathname !== '/') return false;
+        return href === `/#${activeSection}`;
+    };
 
     return (
         <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/50 backdrop-blur-xl backdrop-saturate-150 shadow-2xl border-b border-white/5' : 'bg-transparent'}`}>
@@ -59,7 +92,9 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                                    aria-current={isLinkActive(link.href) ? 'page' : undefined}
+                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${isLinkActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-primary'
+                                        }`}
                                 >
                                     {link.name}
                                 </Link>
@@ -72,7 +107,7 @@ const Navbar = () => {
                             type="button"
                             className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-primary focus:outline-none"
                             aria-controls="mobile-menu"
-                            aria-expanded="false"
+                            aria-expanded={isOpen}
                         >
                             <span className="sr-only">Open main menu</span>
                             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -94,7 +129,9 @@ const Navbar = () => {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium"
+                                aria-current={isLinkActive(link.href) ? 'page' : undefined}
+                                className={`block px-3 py-2 rounded-md text-base font-medium ${isLinkActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-primary'
+                                    }`}
                                 onClick={toggleMenu}
                             >
                                 {link.name}
