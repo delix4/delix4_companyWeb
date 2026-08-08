@@ -1,15 +1,20 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import Image from 'next/image';
 
+const sectionIds = ['home', 'projects', 'services', 'why-us', 'contact'];
+
 const Navbar = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,18 +29,46 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (pathname !== '/') return;
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [pathname]);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const navLinks = [
     { name: 'Home', href: '/#home', ariaLabel: 'Navigate to home section' },
-    { name: 'Projects', href: '/projects', ariaLabel: 'View our portfolio of projects' },
+    { name: 'Projects', href: '/#projects', ariaLabel: 'View our portfolio of projects' },
     { name: 'Services', href: '/#services', ariaLabel: 'View our services and capabilities' },
     { name: 'Why Us', href: '/#why-us', ariaLabel: 'Learn why choose us' },
     { name: 'Careers', href: '/careers', ariaLabel: 'View career opportunities' },
-    { name: 'Contact', href: '/contact', ariaLabel: 'Get in touch with us' },
+    { name: 'Contact', href: '/#contact', ariaLabel: 'Get in touch with us' },
   ];
+
+  const isLinkActive = (href: string) => {
+    if (href === '/careers') return pathname === '/careers';
+    if (pathname !== '/') return false;
+    return href === `/#${activeSection}`;
+  };
 
   return (
     <nav
@@ -63,7 +96,8 @@ const Navbar = () => {
                   href={link.href}
                   title={link.ariaLabel}
                   aria-label={link.ariaLabel}
-                  className="text-gray-300 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
+                  aria-current={isLinkActive(link.href) ? 'page' : undefined}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${isLinkActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-primary'}`}
                 >
                   {link.name}
                 </Link>
@@ -76,7 +110,7 @@ const Navbar = () => {
               type="button"
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-primary focus:outline-none"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -85,6 +119,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,7 +133,8 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 aria-label={link.ariaLabel}
-                className="text-gray-300 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors"
+                aria-current={isLinkActive(link.href) ? 'page' : undefined}
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${isLinkActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-primary'}`}
                 onClick={toggleMenu}
               >
                 {link.name}
@@ -106,6 +142,7 @@ const Navbar = () => {
             ))}
           </div>
         </motion.div>
+      )}
     </nav>
   );
 };

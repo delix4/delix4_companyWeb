@@ -66,7 +66,7 @@ export default function HeroSection() {
               transition={{ duration: 0.7, delay: 0.3 }}
             >
               <Link
-                href="/projects"
+                href="#projects"
                 className="group relative px-8 py-4 bg-primary text-black font-bold rounded-full overflow-hidden flex items-center justify-center transition-all hover:shadow-lg hover:shadow-primary/20 hover:scale-105 active:scale-95"
               >
                 <span className="relative z-10 flex items-center">
@@ -76,7 +76,7 @@ export default function HeroSection() {
               </Link>
 
               <Link
-                href="/contact"
+                href="#contact"
                 className="group px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-primary/50 transition-all flex items-center justify-center hover:shadow-lg hover:shadow-primary/10 active:scale-95"
               >
                 Get a Quote{' '}
@@ -92,9 +92,9 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 0.5 }}
             >
               {[
-                { label: 'Projects', value: '50+' },
-                { label: 'Satisfaction', value: '98%' },
-                { label: 'Exp. Years', value: '5+' },
+                { label: 'Projects', value: '2' },
+                { label: 'Clients', value: '1' },
+                { label: 'Exp. Years', value: '1+' },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col items-center lg:items-start">
                   <span className="text-2xl font-bold text-white mb-1">{stat.value}</span>

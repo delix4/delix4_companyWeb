@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+import { MotionConfig } from 'framer-motion';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,31 +17,29 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
+const siteUrl = 'https://delix4.com';
+const title = 'Delix4 - Innovative Solutions';
+const description =
+  'Delix4 builds high-performance websites, mobile apps, and digital marketing solutions for modern businesses.';
+
 export const metadata: Metadata = {
-  title: 'Delix4 - Web Development, Mobile Apps & Digital Solutions',
-  description: 'Transform your business with innovative web development, mobile applications, and digital marketing solutions. Expert tech strategy and digital transformation services.',
-  keywords: 'web development, mobile apps, digital marketing, software development, digital transformation, tech consulting, Next.js, React',
-  authors: [{ name: 'Delix4' }],
-  creator: 'Delix4',
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: 'https://delix4.com',
-    title: 'Delix4 - Innovative Digital Solutions for Modern Businesses',
-    description: 'Transform your business with cutting-edge web development, mobile apps, and digital marketing solutions.',
-    images: [
-      {
-        url: 'https://delix4.com/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Delix4 - Digital Solutions',
-      },
-    ],
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: '%s | Delix4',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Delix4 - Innovative Digital Solutions',
-    description: 'Transform your business with web development, mobile apps & digital marketing',
+  description,
+  keywords: [
+    'Delix4',
+    'web development',
+    'mobile apps',
+    'digital marketing',
+    'software consulting',
+    'Sri Lanka',
+  ],
+  robots: {
+    index: true,
+    follow: true,
   },
   icons: {
     icon: [
@@ -48,7 +47,20 @@ export const metadata: Metadata = {
       { url: '/tablogo.png', sizes: '32x32', type: 'image/png' },
     ],
   },
-  robots: 'index, follow',
+  openGraph: {
+    type: 'website',
+    url: siteUrl,
+    siteName: 'Delix4',
+    title,
+    description,
+    images: [{ url: '/logo.png' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/logo.png'],
+  },
 };
 
 export const viewport: Viewport = {
@@ -62,17 +74,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Delix4',
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+    email: 'hello@delix4.com',
+    telephone: '+94776309171',
+  };
+
   return (
     <html lang="en">
       <body
         className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased flex flex-col min-h-screen bg-black`}
       >
-        <ScrollProgress />
-        <div className="bg-noise"></div>
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <WhatsAppButton />
-        <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <MotionConfig reducedMotion="user">
+          <ScrollProgress />
+          <div className="bg-noise"></div>
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <WhatsAppButton />
+          <Footer />
+        </MotionConfig>
       </body>
     </html>
   );

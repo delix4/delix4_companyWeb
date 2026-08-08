@@ -43,8 +43,13 @@ export default function Home() {
             <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">
               What We Offer
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Services & Capabilities</h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">Comprehensive solutions designed to drive your business forward with cutting-edge technology and innovation.</p>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our Services & Capabilities
+            </h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Comprehensive solutions designed to drive your business forward with cutting-edge
+              technology and innovation.
+            </p>
           </motion.div>
 
           <motion.div
@@ -120,19 +125,11 @@ export default function Home() {
                 </div>
                 <div className="mt-8">
                   <div className="flex -space-x-4">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full bg-gray-800 border-2 border-black flex items-center justify-center text-xs text-white"
-                      >
-                        U{i}
-                      </div>
-                    ))}
                     <div className="w-10 h-10 rounded-full bg-primary border-2 border-black flex items-center justify-center text-xs font-bold text-black">
-                      +20
+                      C1
                     </div>
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">Happy clients worldwide</p>
+                  <p className="text-sm text-gray-500 mt-2">Our first client, onboarded in 2026</p>
                 </div>
               </div>
             </motion.div>
@@ -143,11 +140,9 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col justify-center items-center text-center hover:bg-white/10 transition-colors backdrop-blur-sm"
             >
-              <div className="text-5xl font-bold text-white mb-2">98%</div>
-              <div className="text-sm text-gray-400">Client Satisfaction</div>
-              <div className="w-full bg-gray-800 h-1 mt-4 rounded-full overflow-hidden">
-                <div className="bg-green-500 w-[98%] h-full"></div>
-              </div>
+              <div className="text-5xl font-bold text-white mb-2">2026</div>
+              <div className="text-sm text-gray-400">Founded</div>
+              <Zap className="h-8 w-8 text-primary mt-4 opacity-50" />
             </motion.div>
 
             <motion.div
@@ -157,7 +152,7 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               className="bg-white/5 border border-white/10 rounded-3xl p-6 flex flex-col justify-center items-center text-center hover:bg-white/10 transition-colors backdrop-blur-sm"
             >
-              <div className="text-5xl font-bold text-white mb-2">50+</div>
+              <div className="text-5xl font-bold text-white mb-2">2</div>
               <div className="text-sm text-gray-400">Projects Delivered</div>
               <CheckCircle className="h-8 w-8 text-primary mt-4 opacity-50" />
             </motion.div>

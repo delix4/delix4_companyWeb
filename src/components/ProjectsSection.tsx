@@ -7,63 +7,24 @@ import { ExternalLink, Github } from 'lucide-react';
 
 const projects = [
   {
-    title: 'E-Commerce Revolution',
+    title: 'Delix4 Web Application',
     category: 'Web Development',
     description:
-      'A full-featured online store with real-time inventory management, secure payments, and AI-driven product recommendations.',
-    image: '/banner.jpg',
-    tech: ['Next.js', 'Stripe', 'Supabase'],
+      "Our own company website and web platform, built to showcase Delix4's services, brand, and digital presence.",
+    image: '/logo.png',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
   },
   {
-    title: 'FinTech Dashboard',
-    category: 'Web Application',
-    description:
-      'Real-time financial analytics dashboard for a leading investment firm, processing millions of data points daily.',
-    image: '/banner.jpg',
-    tech: ['React', 'D3.js', 'Node.js'],
-  },
-  {
-    title: 'Fitness Tracker App',
+    title: 'AI-Powered Hydration Monitoring',
     category: 'Mobile App',
     description:
-      'Cross-platform mobile application for tracking workouts, nutrition, and connecting with personal trainers.',
-    image: '/banner.jpg',
-    tech: ['React Native', 'Firebase', 'HealthKit'],
-  },
-  {
-    title: 'Corporate Identity',
-    category: 'Branding & Design',
-    description:
-      'Complete digital rebranding for a global logistics company, including website, design system, and marketing assets.',
-    image: '/banner.jpg',
-    tech: ['Figma', 'Tailwind CSS', 'Motion'],
-  },
-  {
-    title: 'Smart Home Hub',
-    category: 'IoT Solution',
-    description:
-      'Centralized control interface for smart home devices, featuring voice control integration and energy monitoring.',
-    image: '/banner.jpg',
-    tech: ['IoT', 'WebSockets', 'PWA'],
-  },
-  {
-    title: 'Travel Companion',
-    category: 'Mobile App',
-    description:
-      'AI-powered travel planner that creates personalized itineraries and provides real-time local recommendations.',
-    image: '/banner.jpg',
-    tech: ['Flutter', 'OpenAI API', 'Google Maps'],
+      'An AI-powered mobile health application that monitors and predicts hydration levels using machine learning and computer vision. It uses XGBoost for hydration forecasting and MobileNetV2 to detect dehydration from lip images, delivering personalized hydration insights and recommendations.',
+    image: '/logo.png',
+    tech: ['XGBoost', 'MobileNetV2', 'Computer Vision'],
   },
 ];
 
-const categories = [
-  'All',
-  'Web Development',
-  'Mobile App',
-  'Branding & Design',
-  'IoT Solution',
-  'Web Application',
-];
+const categories = ['All', 'Web Development', 'Mobile App'];
 
 export default function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -89,9 +50,9 @@ export default function ProjectsSection() {
           <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
             <span className="text-primary">Featured</span> Projects
           </h3>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Discover how we&apos;ve helped businesses transform their digital presence with
-            cutting-edge technology and innovative design.
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            A first look at what we&apos;re building — from our own platform to real work for our
+            clients.
           </p>
         </motion.div>
 

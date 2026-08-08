@@ -29,22 +29,10 @@ const perks = [
 
 const jobs = [
   {
-    title: 'Senior Full Stack Engineer',
+    title: 'Software Engineer Intern',
     department: 'Engineering',
     location: 'Remote',
-    type: 'Full-time',
-  },
-  {
-    title: 'UI/UX Designer',
-    department: 'Design',
-    location: 'Remote',
-    type: 'Full-time',
-  },
-  {
-    title: 'Product Manager',
-    department: 'Product',
-    location: 'Remote',
-    type: 'Full-time',
+    type: 'Internship',
   },
 ];
 
