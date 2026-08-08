@@ -1,17 +1,15 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { motion, Variants } from "framer-motion";
-import { ArrowRight, Code, Smartphone, BarChart, Zap, CheckCircle, Mail, Phone } from "lucide-react";
-import ProjectsSection from "@/components/ProjectsSection";
-import HeroSection from "@/components/HeroSection";
-import TechStack from "@/components/TechStack";
-import ContactForm from "@/components/ContactForm";
+import { motion, Variants } from 'framer-motion';
+import { Code, Smartphone, BarChart, Zap, CheckCircle, Mail, Phone } from 'lucide-react';
+import ProjectsSection from '@/components/ProjectsSection';
+import HeroSection from '@/components/HeroSection';
+import TechStack from '@/components/TechStack';
+import ContactForm from '@/components/ContactForm';
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
 const staggerContainer: Variants = {
@@ -19,9 +17,9 @@ const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 export default function Home() {
@@ -42,8 +40,16 @@ export default function Home() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Our Capabilities</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white">Engineering Excellence</h3>
+            <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">
+              What We Offer
+            </h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our Services & Capabilities
+            </h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Comprehensive solutions designed to drive your business forward with cutting-edge
+              technology and innovation.
+            </p>
           </motion.div>
 
           <motion.div
@@ -54,10 +60,26 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {[
-              { icon: Code, title: "Web Development", desc: "High-performance websites built with Next.js and React." },
-              { icon: Smartphone, title: "Mobile Apps", desc: "Native and cross-platform mobile applications." },
-              { icon: BarChart, title: "Digital Marketing", desc: "Strategic campaigns to boost your online presence." },
-              { icon: Zap, title: "Consulting", desc: "Expert tech strategy and digital transformation advice." },
+              {
+                icon: Code,
+                title: 'Web Development',
+                desc: 'High-performance websites built with Next.js and React.',
+              },
+              {
+                icon: Smartphone,
+                title: 'Mobile Apps',
+                desc: 'Native and cross-platform mobile applications.',
+              },
+              {
+                icon: BarChart,
+                title: 'Digital Marketing',
+                desc: 'Strategic campaigns to boost your online presence.',
+              },
+              {
+                icon: Zap,
+                title: 'Consulting',
+                desc: 'Expert tech strategy and digital transformation advice.',
+              },
             ].map((service, index) => (
               <motion.div
                 key={index}
@@ -68,7 +90,7 @@ export default function Home() {
                   <service.icon className="h-7 w-7" />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-3">{service.title}</h4>
-                <p className="text-gray-400">{service.desc}</p>
+                <p className="text-gray-400 leading-relaxed">{service.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -95,11 +117,17 @@ export default function Home() {
                     <Zap className="h-8 w-8 text-primary" />
                   </div>
                   <h3 className="text-3xl font-bold text-white mb-4">Lightning Fast Delivery</h3>
-                  <p className="text-gray-400 text-lg">We don't just build; we launch. Our streamlined agile workflow ensuring your project goes from concept to market in record time without compromising quality.</p>
+                  <p className="text-gray-400 text-lg">
+                    We don&apos;t just build; we launch. Our streamlined agile workflow ensuring
+                    your project goes from concept to market in record time without compromising
+                    quality.
+                  </p>
                 </div>
                 <div className="mt-8">
                   <div className="flex -space-x-4">
-                    <div className="w-10 h-10 rounded-full bg-primary border-2 border-black flex items-center justify-center text-xs font-bold text-black">C1</div>
+                    <div className="w-10 h-10 rounded-full bg-primary border-2 border-black flex items-center justify-center text-xs font-bold text-black">
+                      C1
+                    </div>
                   </div>
                   <p className="text-sm text-gray-500 mt-2">Our first client, onboarded in 2026</p>
                 </div>
@@ -142,7 +170,9 @@ export default function Home() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Get In Touch</h2>
+            <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">
+              Get In Touch
+            </h2>
             <h3 className="text-3xl md:text-4xl font-bold text-white">Ready to Start a Project?</h3>
           </motion.div>
 

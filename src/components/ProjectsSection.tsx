@@ -1,125 +1,133 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { ExternalLink, Github } from "lucide-react";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { ExternalLink, Github } from 'lucide-react';
 
 const projects = [
-    {
-        title: "Delix4 Web Application",
-        category: "Web Development",
-        description: "Our own company website and web platform, built to showcase Delix4's services, brand, and digital presence.",
-        image: "/logo.png",
-        tech: ["Next.js", "TypeScript", "Tailwind CSS"],
-    },
-    {
-        title: "AI-Powered Hydration Monitoring",
-        category: "Mobile App",
-        description: "An AI-powered mobile health application that monitors and predicts hydration levels using machine learning and computer vision. It uses XGBoost for hydration forecasting and MobileNetV2 to detect dehydration from lip images, delivering personalized hydration insights and recommendations.",
-        image: "/logo.png",
-        tech: ["XGBoost", "MobileNetV2", "Computer Vision"],
-    },
+  {
+    title: 'Delix4 Web Application',
+    category: 'Web Development',
+    description:
+      "Our own company website and web platform, built to showcase Delix4's services, brand, and digital presence.",
+    image: '/logo.png',
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    title: 'AI-Powered Hydration Monitoring',
+    category: 'Mobile App',
+    description:
+      'An AI-powered mobile health application that monitors and predicts hydration levels using machine learning and computer vision. It uses XGBoost for hydration forecasting and MobileNetV2 to detect dehydration from lip images, delivering personalized hydration insights and recommendations.',
+    image: '/logo.png',
+    tech: ['XGBoost', 'MobileNetV2', 'Computer Vision'],
+  },
 ];
 
-const categories = ["All", "Web Development", "Mobile App"];
+const categories = ['All', 'Web Development', 'Mobile App'];
 
 export default function ProjectsSection() {
-    const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState('All');
 
-    const filteredProjects = activeCategory === "All"
-        ? projects
-        : projects.filter(project => project.category === activeCategory);
+  const filteredProjects =
+    activeCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === activeCategory);
 
-    return (
-        <section id="projects" className="py-24 bg-gray-950 relative">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-12"
-                >
-                    <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">Our Work</h2>
-                    <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                        <span className="text-primary">Featured</span> Projects
-                    </h3>
-                    <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                        A first look at what we're building — from our own platform to real work for our clients.
-                    </p>
-                </motion.div>
+  return (
+    <section id="projects" className="py-24 bg-gray-950 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">
+            Our Work
+          </h2>
+          <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
+            <span className="text-primary">Featured</span> Projects
+          </h3>
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            A first look at what we&apos;re building — from our own platform to real work for our
+            clients.
+          </p>
+        </motion.div>
 
-                {/* Filter Buttons */}
-                <div className="flex flex-wrap justify-center gap-4 mb-16">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => setActiveCategory(category)}
-                            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category
-                                    ? "bg-primary text-black shadow-lg shadow-primary/20 scale-105"
-                                    : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10"
-                                }`}
-                        >
-                            {category}
-                        </button>
+        {/* Filter Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeCategory === category
+                  ? 'bg-primary text-black shadow-lg shadow-primary/20 scale-105'
+                  : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                    <button className="p-2 bg-white rounded-full text-black hover:bg-primary transition-colors">
+                      <ExternalLink className="h-5 w-5" />
+                    </button>
+                    <button className="p-2 bg-white rounded-full text-black hover:bg-primary transition-colors">
+                      <Github className="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+                <div className="p-6 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="text-primary text-sm font-medium mb-2">{project.category}</div>
+                    <h4 className="text-xl font-bold mb-3 text-white group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h4>
+                    <p className="text-gray-400 text-sm mb-4 line-clamp-3">{project.description}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tech.map((t, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 bg-gray-800 rounded text-xs text-gray-300 border border-gray-700"
+                      >
+                        {t}
+                      </span>
                     ))}
+                  </div>
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
-                            <motion.div
-                                key={project.title}
-                                layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
-                                className="group bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10"
-                            >
-                                <div className="relative h-48 overflow-hidden">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                                        <button className="p-2 bg-white rounded-full text-black hover:bg-primary transition-colors">
-                                            <ExternalLink className="h-5 w-5" />
-                                        </button>
-                                        <button className="p-2 bg-white rounded-full text-black hover:bg-primary transition-colors">
-                                            <Github className="h-5 w-5" />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="p-6 h-full flex flex-col justify-between">
-                                    <div>
-                                        <div className="text-primary text-sm font-medium mb-2">{project.category}</div>
-                                        <h4 className="text-xl font-bold mb-3 text-white group-hover:text-primary transition-colors">
-                                            {project.title}
-                                        </h4>
-                                        <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                                            {project.description}
-                                        </p>
-                                    </div>
-                                    <div className="flex flex-wrap gap-2 mt-auto">
-                                        {project.tech.map((t, i) => (
-                                            <span key={i} className="px-2 py-1 bg-gray-800 rounded text-xs text-gray-300 border border-gray-700">
-                                                {t}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </div>
-                {filteredProjects.length === 0 && (
-                    <div className="text-center text-gray-500 py-12">No projects found in this category.</div>
-                )}
-            </div>
-        </section>
-    );
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+        {filteredProjects.length === 0 && (
+          <div className="text-center text-gray-500 py-12">No projects found in this category.</div>
+        )}
+      </div>
+    </section>
+  );
 }
