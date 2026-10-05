@@ -6,67 +6,112 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import ScrollProgress from '@/components/ScrollProgress';
+import { JsonLd } from '@/components/ui/primitives';
+import { services } from '@/lib/services';
+import { site } from '@/lib/site';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-sans',
+  display: 'swap',
 });
 
+// Only used for small decorative code snippets, so it is not preloaded.
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
+  display: 'swap',
+  preload: false,
 });
 
-const siteUrl = 'https://delix4.com';
-const title = 'Delix4 - Innovative Solutions';
-const description =
-  'Delix4 builds high-performance websites, mobile apps, and digital marketing solutions for modern businesses.';
+const defaultTitle = 'Delix4 – Web, Mobile & AI Software Development Company';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(site.url),
   title: {
-    default: title,
+    default: defaultTitle,
     template: '%s | Delix4',
   },
-  description,
+  description: site.description,
+  applicationName: site.name,
   keywords: [
-    'Delix4',
-    'web development',
-    'mobile apps',
-    'digital marketing',
-    'software consulting',
-    'Sri Lanka',
+    'software development company',
+    'web development company',
+    'mobile app development',
+    'AI development services',
+    'machine learning development',
+    'custom software development',
+    'Next.js development',
+    'Flutter app development',
+    'Sri Lanka software company',
   ],
-  robots: {
-    index: true,
-    follow: true,
-  },
+  alternates: { canonical: '/' },
+  robots: { index: true, follow: true },
   icons: {
-    icon: [
-      { url: '/tablogo.png', sizes: '192x192', type: 'image/png' },
-      { url: '/tablogo.png', sizes: '32x32', type: 'image/png' },
-    ],
+    icon: [{ url: '/tablogo.png', type: 'image/png' }],
+    apple: '/tablogo.png',
   },
   openGraph: {
     type: 'website',
-    url: siteUrl,
-    siteName: 'Delix4',
-    title,
-    description,
-    images: [{ url: '/logo.png' }],
+    locale: 'en_US',
+    url: site.url,
+    siteName: site.name,
+    title: defaultTitle,
+    description: site.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title,
-    description,
-    images: ['/logo.png'],
+    title: defaultTitle,
+    description: site.description,
   },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
+  themeColor: '#000000',
+  colorScheme: 'dark',
+};
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/logo.png`,
+      description: site.description,
+      foundingDate: String(site.foundingYear),
+      email: site.email,
+      telephone: '+94776309171',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Colombo',
+        addressCountry: 'LK',
+      },
+      sameAs: Object.values(site.social).filter(Boolean),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: site.email,
+        telephone: '+94776309171',
+        availableLanguage: ['English'],
+      },
+      makesOffer: services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.name, url: `${site.url}/services/${s.slug}` },
+      })),
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      publisher: { '@id': `${site.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -74,30 +119,18 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Delix4',
-    url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
-    email: 'hello@delix4.com',
-    telephone: '+94776309171',
-  };
-
   return (
     <html lang="en">
       <body
         className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased flex flex-col min-h-screen bg-black`}
       >
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
+        <JsonLd data={organizationJsonLd} />
         <MotionConfig reducedMotion="user">
           <ScrollProgress />
-          <div className="bg-noise"></div>
           <Navbar />
-          <main className="flex-grow">{children}</main>
+          <main id="main" className="flex-grow">
+            {children}
+          </main>
           <WhatsAppButton />
           <Footer />
         </MotionConfig>

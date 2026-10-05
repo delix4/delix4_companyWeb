@@ -17,13 +17,13 @@ const perks = [
   },
   {
     icon: Heart,
-    title: 'Health & Wellness',
-    desc: 'Comprehensive health coverage and wellness stipends to keep you at your best.',
+    title: 'Real Product Work',
+    desc: 'Work on web, mobile and AI products that ship to real users — not throwaway tasks.',
   },
   {
     icon: Users,
-    title: 'Team Retreats',
-    desc: 'Annual all-expenses-paid team gatherings in exotic locations.',
+    title: 'Small, Direct Team',
+    desc: 'Work closely with the founders, get honest feedback and see your impact quickly.',
   },
 ];
 
@@ -54,11 +54,12 @@ export default function CareersPage() {
             We&apos;re Hiring
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Join the <span className="text-primary">Revolution</span>
+            Build real products <span className="text-primary">with us</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            We&apos;re on a mission to redefine digital excellence. If you&apos;re passionate,
-            innovative, and ready to make an impact, we want you on our team.
+            We&apos;re a small, remote-first team building web, mobile and AI products for clients
+            worldwide. If you care about quality engineering and want to learn fast, we&apos;d
+            love to hear from you.
           </p>
         </motion.div>
 
@@ -102,7 +103,7 @@ export default function CareersPage() {
           >
             <div>
               <h2 className="text-3xl font-bold text-white mb-2">Open Positions</h2>
-              <p className="text-gray-400">Come help us build the future.</p>
+              <p className="text-gray-400">Current openings at Delix4.</p>
             </div>
             <Link
               href="/contact"

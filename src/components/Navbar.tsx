@@ -1,149 +1,139 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
-
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
-const sectionIds = ['home', 'projects', 'services', 'why-us', 'contact'];
+const navLinks = [
+  { name: 'Services', href: '/services' },
+  { name: 'Work', href: '/case-studies' },
+  { name: 'AI', href: '/services/ai-development' },
+  { name: 'Pricing', href: '/pricing' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
+];
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock page scroll while the mobile menu is open.
   useEffect(() => {
-    if (pathname !== '/') return;
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, [pathname]);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const navLinks = [
-    { name: 'Home', href: '/#home', ariaLabel: 'Navigate to home section' },
-    { name: 'Projects', href: '/#projects', ariaLabel: 'View our portfolio of projects' },
-    { name: 'Services', href: '/#services', ariaLabel: 'View our services and capabilities' },
-    { name: 'Why Us', href: '/#why-us', ariaLabel: 'Learn why choose us' },
-    { name: 'Careers', href: '/careers', ariaLabel: 'View career opportunities' },
-    { name: 'Contact', href: '/#contact', ariaLabel: 'Get in touch with us' },
-  ];
-
-  const isLinkActive = (href: string) => {
-    if (href === '/careers') return pathname === '/careers';
-    if (pathname !== '/') return false;
-    return href === `/#${activeSection}`;
+  const isActive = (href: string) => {
+    if (href === '/services') return pathname === '/services' || (pathname.startsWith('/services/') && pathname !== '/services/ai-development');
+    return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/50 backdrop-blur-xl backdrop-saturate-150 shadow-2xl border-b border-white/5' : 'bg-transparent'}`}
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled || isOpen
+          ? 'bg-black/80 backdrop-blur-xl border-b border-white/5'
+          : 'bg-transparent border-b border-transparent'
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo.png"
-                alt="Delix4 Logo"
-                width={350}
-                height={163}
-                className="h-20 w-auto object-contain"
-                priority
-              />
-            </Link>
-          </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navLinks.map((link) => (
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-black"
+      >
+        Skip to content
+      </a>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main">
+        <div className="flex items-center justify-between h-18 md:h-20">
+          <Link href="/" className="flex items-center shrink-0" aria-label="Delix4 home">
+            <Image
+              src="/logo.png"
+              alt="Delix4"
+              width={350}
+              height={163}
+              className="h-14 md:h-16 w-auto object-contain"
+              priority
+            />
+          </Link>
+
+          <ul className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <li key={link.name}>
                 <Link
-                  key={link.name}
                   href={link.href}
-                  title={link.ariaLabel}
-                  aria-label={link.ariaLabel}
-                  aria-current={isLinkActive(link.href) ? 'page' : undefined}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${isLinkActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-primary'}`}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                  className={`px-3.5 py-2 rounded-full text-sm font-medium transition-colors ${
+                    isActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-white'
+                  }`}
                 >
                   {link.name}
                 </Link>
-              ))}
-            </div>
-          </div>
-          <div className="-mr-2 flex md:hidden">
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center gap-2">
+            <Link
+              href="/contact"
+              className="hidden sm:inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-black hover:bg-yellow-300 transition-colors"
+            >
+              Start Your Project
+            </Link>
             <button
-              onClick={toggleMenu}
+              onClick={() => setIsOpen((o) => !o)}
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-primary focus:outline-none"
+              className="lg:hidden inline-flex items-center justify-center p-2.5 rounded-md text-gray-300 hover:text-primary"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <span className="sr-only">{isOpen ? 'Close menu' : 'Open menu'}</span>
+              {isOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
             </button>
           </div>
         </div>
-      </div>
+      </nav>
 
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10"
-          id="mobile-menu"
-        >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div id="mobile-menu" className="lg:hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/5 bg-black">
+          <ul className="px-4 py-6 space-y-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                aria-label={link.ariaLabel}
-                aria-current={isLinkActive(link.href) ? 'page' : undefined}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${isLinkActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-primary'}`}
-                onClick={toggleMenu}
-              >
-                {link.name}
-              </Link>
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                  className={`block rounded-lg px-4 py-3.5 text-lg font-medium ${
+                    isActive(link.href) ? 'text-primary bg-white/5' : 'text-gray-200 hover:bg-white/5'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              </li>
             ))}
+          </ul>
+          <div className="px-4">
+            <Link
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="block w-full rounded-full bg-primary py-3.5 text-center font-semibold text-black"
+            >
+              Start Your Project
+            </Link>
           </div>
-        </motion.div>
+        </div>
       )}
-    </nav>
+    </header>
   );
 };
 

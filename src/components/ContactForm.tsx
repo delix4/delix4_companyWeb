@@ -1,64 +1,86 @@
 'use client';
 
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { AlertCircle, CheckCircle2, Loader } from 'lucide-react';
+import { budgets, projectTypes, timelines } from '@/lib/contact-options';
+import { site } from '@/lib/site';
+
+type FormData = {
+  name: string;
+  email: string;
+  company: string;
+  projectType: string;
+  budget: string;
+  timeline: string;
+  message: string;
+};
+
+const MAX_MESSAGE = 5000;
+
+const emptyForm = (projectType = ''): FormData => ({
+  name: '',
+  email: '',
+  company: '',
+  projectType,
+  budget: '',
+  timeline: '',
+  message: '',
+});
+
+const inputClass = (hasError: boolean) =>
+  `w-full bg-black/60 border rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:ring-1 transition-colors ${
+    hasError
+      ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+      : 'border-white/10 focus:border-primary focus:ring-primary'
+  }`;
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  // Service pages link here with ?service=<slug> to preselect the project type.
+  const searchParams = useSearchParams();
+  const preselected = searchParams.get('service') ?? '';
+  const initialType = projectTypes.some((p) => p.value === preselected) ? preselected : '';
+
+  const [formData, setFormData] = useState<FormData>(() => emptyForm(initialType));
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
 
   const validateForm = () => {
-    const newErrors: Record<string, string> = {};
+    const newErrors: typeof errors = {};
+    const name = formData.name.trim();
+    const message = formData.message.trim();
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
+    if (!name) newErrors.name = 'Please enter your name';
+    else if (name.length < 2) newErrors.name = 'Name must be at least 2 characters';
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
+    if (!formData.email.trim()) newErrors.email = 'Please enter your email';
+    else if (!/^\S+@\S+\.\S+$/.test(formData.email)) newErrors.email = 'Please enter a valid email address';
 
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    } else if (formData.subject.trim().length < 3) {
-      newErrors.subject = 'Subject must be at least 3 characters';
-    }
+    if (!formData.projectType) newErrors.projectType = 'Please choose a project type';
 
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
+    if (!message) newErrors.message = 'Please tell us a little about your project';
+    else if (message.length < 10) newErrors.message = 'Please add a few more details (at least 10 characters)';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: '' });
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormData]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
 
     setStatus('loading');
-
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -68,8 +90,7 @@ export default function ContactForm() {
 
       if (res.ok) {
         setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        setTimeout(() => setStatus('idle'), 5000);
+        setFormData(emptyForm());
       } else {
         setStatus('error');
       }
@@ -79,106 +100,186 @@ export default function ContactForm() {
     }
   };
 
+  const fieldError = (field: keyof FormData) =>
+    errors[field] ? (
+      <p id={`${field}-error`} className="text-red-400 text-sm mt-1.5 flex items-center gap-1">
+        <AlertCircle className="h-3.5 w-3.5" aria-hidden />
+        {errors[field]}
+      </p>
+    ) : null;
+
+  const describedBy = (field: keyof FormData) => (errors[field] ? `${field}-error` : undefined);
+
+  if (status === 'success') {
+    return (
+      <div className="bg-white/3 border border-green-500/30 p-8 md:p-10 rounded-2xl text-center" role="status">
+        <CheckCircle2 className="h-12 w-12 text-green-500 mx-auto" aria-hidden />
+        <h3 className="mt-5 text-2xl font-bold text-white">Thanks — we have your message</h3>
+        <p className="mt-3 text-gray-400">
+          We will reply {site.responseTime} with questions or next steps. Need to talk sooner?{' '}
+          <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            Message us on WhatsApp
+          </a>
+          .
+        </p>
+        <button
+          type="button"
+          onClick={() => setStatus('idle')}
+          className="mt-6 text-sm text-gray-400 underline hover:text-white"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-sm">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="bg-white/3 border border-white/10 p-6 md:p-8 rounded-2xl">
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">Name <span className="text-primary">*</span></label>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+              Your name <span className="text-primary">*</span>
+            </label>
             <input
               id="name"
               type="text"
               name="name"
+              autoComplete="name"
               value={formData.name}
               onChange={handleChange}
-              aria-describedby={errors.name ? 'name-error' : undefined}
-              className={`w-full bg-black/50 border rounded-lg px-4 py-3 text-white focus:outline-none transition-colors ${errors.name ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-white/10 focus:border-primary focus:ring-1 focus:ring-primary'}`}
-              placeholder="John Doe"
+              aria-invalid={!!errors.name}
+              aria-describedby={describedBy('name')}
+              className={inputClass(!!errors.name)}
+              placeholder="Jane Smith"
             />
-            {errors.name && (
-              <p id="name-error" className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                <AlertCircle className="h-3 w-3" />
-                {errors.name}
-              </p>
-            )}
+            {fieldError('name')}
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">Email <span className="text-primary">*</span></label>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              Work email <span className="text-primary">*</span>
+            </label>
             <input
               id="email"
               type="email"
               name="email"
+              autoComplete="email"
               value={formData.email}
               onChange={handleChange}
-              aria-describedby={errors.email ? 'email-error' : undefined}
-              className={`w-full bg-black/50 border rounded-lg px-4 py-3 text-white focus:outline-none transition-colors ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-white/10 focus:border-primary focus:ring-1 focus:ring-primary'}`}
-              placeholder="john@example.com"
+              aria-invalid={!!errors.email}
+              aria-describedby={describedBy('email')}
+              className={inputClass(!!errors.email)}
+              placeholder="jane@company.com"
             />
-            {errors.email && (
-              <p id="email-error" className="text-red-400 text-sm mt-1 flex items-center gap-1">
-                <AlertCircle className="h-3 w-3" />
-                {errors.email}
-              </p>
-            )}
-          </div>
-        </div>
-        <div>
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">Subject <span className="text-primary">*</span></label>
-          <input
-            id="subject"
-            type="text"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            aria-describedby={errors.subject ? 'subject-error' : undefined}
-            className={`w-full bg-black/50 border rounded-lg px-4 py-3 text-white focus:outline-none transition-colors ${errors.subject ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-white/10 focus:border-primary focus:ring-1 focus:ring-primary'}`}
-            placeholder="Project Inquiry"
-          />
-          {errors.subject && (
-            <p id="subject-error" className="text-red-400 text-sm mt-1 flex items-center gap-1">
-              <AlertCircle className="h-3 w-3" />
-              {errors.subject}
-            </p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">Message <span className="text-primary">*</span></label>
-          <textarea
-            id="message"
-            rows={4}
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            aria-describedby={errors.message ? 'message-error' : undefined}
-            className={`w-full bg-black/50 border rounded-lg px-4 py-3 text-white focus:outline-none transition-colors resize-none ${errors.message ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-white/10 focus:border-primary focus:ring-1 focus:ring-primary'}`}
-            placeholder="Tell us about your project..."
-          />
-          <div className="flex justify-between items-start mt-2">
-            {errors.message && (
-              <p id="message-error" className="text-red-400 text-sm flex items-center gap-1">
-                <AlertCircle className="h-3 w-3" />
-                {errors.message}
-              </p>
-            )}
-            <p className="text-gray-500 text-xs ml-auto">{formData.message.length}/1000</p>
+            {fieldError('email')}
           </div>
         </div>
 
-        {status === 'success' && (
-          <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 flex items-start gap-3">
-            <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="text-green-400 font-medium">Message sent successfully!</p>
-              <p className="text-green-300 text-sm">We&apos;ll get back to you within 24 hours.</p>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
+              Company <span className="text-gray-600">(optional)</span>
+            </label>
+            <input
+              id="company"
+              type="text"
+              name="company"
+              autoComplete="organization"
+              value={formData.company}
+              onChange={handleChange}
+              className={inputClass(false)}
+              placeholder="Company name"
+            />
           </div>
-        )}
+          <div>
+            <label htmlFor="projectType" className="block text-sm font-medium text-gray-300 mb-2">
+              What do you need? <span className="text-primary">*</span>
+            </label>
+            <select
+              id="projectType"
+              name="projectType"
+              value={formData.projectType}
+              onChange={handleChange}
+              aria-invalid={!!errors.projectType}
+              aria-describedby={describedBy('projectType')}
+              className={inputClass(!!errors.projectType)}
+            >
+              <option value="">Select a project type</option>
+              {projectTypes.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+            {fieldError('projectType')}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="budget" className="block text-sm font-medium text-gray-300 mb-2">
+              Estimated budget
+            </label>
+            <select id="budget" name="budget" value={formData.budget} onChange={handleChange} className={inputClass(false)}>
+              <option value="">Select a range</option>
+              {budgets.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="timeline" className="block text-sm font-medium text-gray-300 mb-2">
+              Timeline
+            </label>
+            <select id="timeline" name="timeline" value={formData.timeline} onChange={handleChange} className={inputClass(false)}>
+              <option value="">Select a timeline</option>
+              {timelines.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+            Project details <span className="text-primary">*</span>
+          </label>
+          <textarea
+            id="message"
+            rows={5}
+            name="message"
+            maxLength={MAX_MESSAGE}
+            value={formData.message}
+            onChange={handleChange}
+            aria-invalid={!!errors.message}
+            aria-describedby={describedBy('message')}
+            className={`${inputClass(!!errors.message)} resize-y`}
+            placeholder="What are you building, who is it for, and what does success look like?"
+          />
+          <div className="flex justify-between items-start">
+            {fieldError('message')}
+            <p className="text-gray-600 text-xs ml-auto mt-1.5">
+              {formData.message.length}/{MAX_MESSAGE}
+            </p>
+          </div>
+        </div>
+
         {status === 'error' && (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 flex items-start gap-3">
-            <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
+          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 flex items-start gap-3" role="alert">
+            <AlertCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" aria-hidden />
             <div>
-              <p className="text-red-400 font-medium">Failed to send message</p>
-              <p className="text-red-300 text-sm">Please try again or contact us directly.</p>
+              <p className="text-red-300 font-medium">Your message could not be sent</p>
+              <p className="text-red-300/80 text-sm">
+                Please try again, or email us at{' '}
+                <a href={`mailto:${site.email}`} className="underline">
+                  {site.email}
+                </a>
+                .
+              </p>
             </div>
           </div>
         )}
@@ -186,18 +287,25 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="w-full bg-primary text-black font-bold py-3 px-4 rounded-lg hover:bg-yellow-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-primary text-black font-semibold py-3.5 px-4 rounded-full hover:bg-yellow-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {status === 'loading' ? (
             <>
-              <Loader className="h-5 w-5 animate-spin" />
-              Sending...
+              <Loader className="h-5 w-5 animate-spin" aria-hidden />
+              Sending…
             </>
           ) : (
-            'Send Message'
+            'Send Project Details'
           )}
         </button>
-        <p className="text-xs text-gray-500 text-center">We respect your privacy. Your data is safe with us.</p>
+        <p className="text-xs text-gray-500 text-center">
+          We reply {site.responseTime}. Your details are only used to respond to your enquiry — see
+          our{' '}
+          <Link href="/privacy" className="underline hover:text-gray-300">
+            privacy policy
+          </Link>
+          .
+        </p>
       </form>
     </div>
   );
