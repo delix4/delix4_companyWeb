@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { budgets, labelFor, projectTypes, timelines } from '@/lib/contact-options';
 
 // In-memory rate limiter (per IP, max 5 requests per 15 minutes)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -87,7 +88,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, subject, message } = body as Record<string, unknown>;
+    const { name, email, subject, message, company, projectType, budget, timeline } =
+      body as Record<string, unknown>;
 
     // Type checks
     if (
@@ -104,7 +106,18 @@ export async function POST(request: Request) {
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
     const trimmedMessage = message.trim();
-    const trimmedSubject = typeof subject === 'string' ? subject.trim() : '';
+    const trimmedCompany = typeof company === 'string' ? company.trim() : '';
+    // Select fields are mapped through allow-lists; unknown values are dropped.
+    const projectTypeLabel = labelFor(
+      projectTypes,
+      typeof projectType === 'string' ? projectType : undefined
+    );
+    const budgetLabel = labelFor(budgets, typeof budget === 'string' ? budget : undefined);
+    const timelineLabel = labelFor(timelines, typeof timeline === 'string' ? timeline : undefined);
+    const trimmedSubject =
+      typeof subject === 'string' && subject.trim()
+        ? subject.trim()
+        : `${projectTypeLabel ?? 'Project'} enquiry${trimmedCompany ? ` from ${trimmedCompany}` : ''}`;
 
     // Field validations
     if (!trimmedName || !trimmedEmail || !trimmedMessage) {
@@ -124,6 +137,13 @@ export async function POST(request: Request) {
     if (trimmedName.length < 2 || trimmedName.length > 100) {
       return NextResponse.json(
         { error: 'Name must be between 2 and 100 characters.' },
+        { status: 400, headers: SECURITY_HEADERS }
+      );
+    }
+
+    if (trimmedCompany.length > 120) {
+      return NextResponse.json(
+        { error: 'Company must be 120 characters or fewer.' },
         { status: 400, headers: SECURITY_HEADERS }
       );
     }
@@ -170,13 +190,22 @@ export async function POST(request: Request) {
     const htmlEmail = escapeHtml(safeEmail);
     const htmlSubject = escapeHtml(safeSubject);
     const htmlMessage = escapeHtml(trimmedMessage);
+    const safeCompany = sanitizeHeader(trimmedCompany);
+
+    // Labels come from fixed allow-lists; the company name is user input and is escaped.
+    const details: [string, string][] = [
+      ['Company', safeCompany || 'Not provided'],
+      ['Project type', projectTypeLabel ?? 'Not provided'],
+      ['Budget', budgetLabel ?? 'Not provided'],
+      ['Timeline', timelineLabel ?? 'Not provided'],
+    ];
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: 'hello@delix4.com',
       replyTo: safeEmail,
-      subject: `New Contact Form Submission: ${safeSubject || 'No Subject'}`,
-      text: `Name: ${safeName}\nEmail: ${safeEmail}\nSubject: ${safeSubject || 'Not provided'}\n\nMessage:\n${trimmedMessage}\n\n---\nSubmitted from: Delix4 Contact Form`,
+      subject: `New enquiry: ${safeSubject}`,
+      text: `Name: ${safeName}\nEmail: ${safeEmail}\nSubject: ${safeSubject}\n${details.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\nMessage:\n${trimmedMessage}\n\n---\nSubmitted from: Delix4 Contact Form`,
       html: `
         <html>
           <body style="font-family: Arial, sans-serif; color: #333;">
@@ -184,7 +213,8 @@ export async function POST(request: Request) {
               <h2 style="color: #ffd700; border-bottom: 2px solid #ffd700; padding-bottom: 10px;">New Contact Form Submission</h2>
               <p><strong>Name:</strong> ${htmlName}</p>
               <p><strong>Email:</strong> ${htmlEmail}</p>
-              <p><strong>Subject:</strong> ${htmlSubject || 'Not provided'}</p>
+              <p><strong>Subject:</strong> ${htmlSubject}</p>
+              ${details.map(([k, v]) => `<p><strong>${k}:</strong> ${escapeHtml(v)}</p>`).join('')}
               <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
               <h3 style="color: #333;">Message:</h3>
               <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${htmlMessage}</div>
