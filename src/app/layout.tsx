@@ -28,8 +28,9 @@ const defaultTitle = 'Delix4 – Web, Mobile & AI Software Development Company';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  // Short browser-tab title for the homepage; the descriptive title is kept for social previews.
   title: {
-    default: defaultTitle,
+    default: 'Delix4.com',
     template: '%s | Delix4',
   },
   description: site.description,
