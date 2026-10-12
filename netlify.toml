@@ -1,9 +1,12 @@
 [build]
-  command = "npm run build"
+  # Drop any Turbopack build cache restored from earlier deploys: it can contain environment
+  # variable values (see turbopackFileSystemCacheForBuild in next.config.ts).
+  command = "rm -rf .next/cache/turbopack && npm run build"
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
+  # Node 20 reached end-of-life in April 2026; the Netlify Next.js plugin already requires 22.
+  NODE_VERSION = "22"
   NPM_FLAGS = "--legacy-peer-deps"
 
 [[plugins]]

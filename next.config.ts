@@ -24,6 +24,12 @@ const contentSecurityPolicy = [
 ].join('; ');
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Since Next.js 16.3 the build cache is on by default and it records environment variable
+    // values, so secrets such as ADMIN_PASSWORD would be written into .next/cache (Netlify's
+    // secret scanner rightly fails the deploy). Builds are fast enough without it.
+    turbopackFileSystemCacheForBuild: false,
+  },
   reactCompiler: true,
   devIndicators: false,
   poweredByHeader: false,
