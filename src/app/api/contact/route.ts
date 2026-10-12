@@ -57,8 +57,10 @@ export async function POST(request: Request) {
     );
   }
 
-  // Rate limiting by IP
+  // Rate limiting by IP. Netlify sets x-nf-client-connection-ip itself, so visitors cannot spoof it
+  // the way they can prepend fake addresses to X-Forwarded-For.
   const ip =
+    request.headers.get('x-nf-client-connection-ip') ??
     request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
     request.headers.get('x-real-ip') ??
     'unknown';
