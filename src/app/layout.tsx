@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import ScrollProgress from '@/components/ScrollProgress';
+import PublicOnly from '@/components/PublicOnly';
 import { JsonLd } from '@/components/ui/primitives';
 import { services } from '@/lib/services';
 import { site } from '@/lib/site';
@@ -70,8 +71,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#000000',
-  colorScheme: 'dark',
+  themeColor: '#F4F7FB',
+  colorScheme: 'light',
 };
 
 const organizationJsonLd = {
@@ -123,17 +124,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased flex flex-col min-h-screen bg-black`}
+        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased flex flex-col min-h-screen bg-page text-body`}
       >
         <JsonLd data={organizationJsonLd} />
         <MotionConfig reducedMotion="user">
-          <ScrollProgress />
-          <Navbar />
+          <PublicOnly>
+            <ScrollProgress />
+            <Navbar />
+          </PublicOnly>
           <main id="main" className="flex-grow">
             {children}
           </main>
-          <WhatsAppButton />
-          <Footer />
+          <PublicOnly>
+            <WhatsAppButton />
+            <Footer />
+          </PublicOnly>
         </MotionConfig>
       </body>
     </html>

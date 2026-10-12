@@ -4,10 +4,10 @@ import { ArrowRight } from 'lucide-react';
 
 const variants = {
   primary:
-    'bg-primary text-black font-semibold hover:bg-yellow-300 shadow-lg shadow-primary/10 hover:shadow-primary/25',
+    'bg-primary text-white font-semibold hover:bg-primary-hover shadow-lg shadow-primary/20 hover:shadow-primary/35',
   secondary:
-    'bg-white/5 text-white font-medium border border-white/15 hover:bg-white/10 hover:border-primary/50',
-  ghost: 'text-primary font-medium hover:text-yellow-300 px-0',
+    'bg-card text-heading font-medium border border-line-strong hover:bg-subtle hover:border-primary/50',
+  ghost: 'text-link font-medium hover:text-link-hover px-0',
 };
 
 const sizes = {
@@ -60,17 +60,17 @@ export function SectionHeading({
   return (
     <div className={`mb-12 md:mb-16 ${centered ? 'text-center mx-auto' : ''} max-w-3xl`}>
       {eyebrow && (
-        <p className="text-primary font-semibold tracking-widest uppercase text-xs md:text-sm mb-3">
+        <p className="text-link font-semibold tracking-widest uppercase text-xs md:text-sm mb-3">
           {eyebrow}
         </p>
       )}
       <Heading
-        className={`font-bold text-white tracking-tight text-balance ${Heading === 'h1' ? 'text-4xl md:text-6xl' : 'text-3xl md:text-5xl'}`}
+        className={`font-bold text-heading tracking-tight text-balance ${Heading === 'h1' ? 'text-4xl md:text-6xl' : 'text-3xl md:text-5xl'}`}
       >
         {title}
       </Heading>
       {description && (
-        <p className={`mt-5 text-lg text-gray-400 leading-relaxed ${centered ? 'mx-auto' : ''} max-w-2xl`}>
+        <p className={`mt-5 text-lg text-muted leading-relaxed ${centered ? 'mx-auto' : ''} max-w-2xl`}>
           {description}
         </p>
       )}
@@ -93,7 +93,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`py-20 md:py-28 relative ${tone === 'muted' ? 'bg-gray-950' : 'bg-black'} ${className}`}
+      className={`py-20 md:py-28 relative ${tone === 'muted' ? 'bg-page-alt' : 'bg-page'} ${className}`}
       {...rest}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
@@ -103,7 +103,7 @@ export function Section({
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs text-gray-300">
+    <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-subtle border border-line text-xs text-body">
       {children}
     </span>
   );

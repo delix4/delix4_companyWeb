@@ -1,9 +1,10 @@
 import type { MetadataRoute } from 'next';
 import { services } from '@/lib/services';
-import { caseStudies } from '@/lib/case-studies';
+import { getPublishedProjects } from '@/lib/content';
 import { site } from '@/lib/site';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const caseStudies = await getPublishedProjects();
   const lastModified = new Date();
   const entry = (path: string, priority: number): MetadataRoute.Sitemap[number] => ({
     url: `${site.url}${path}`,

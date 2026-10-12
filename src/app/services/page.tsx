@@ -29,14 +29,14 @@ export default function ServicesPage() {
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/3 p-8 hover:border-primary/40 transition-colors"
+              className="group flex flex-col rounded-2xl border border-line bg-card p-8 hover:border-primary/40 transition-colors"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 text-link flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                 <ServiceIcon slug={s.slug} className="h-6 w-6" />
               </div>
-              <h2 className="mt-6 text-2xl font-bold text-white">{s.name}</h2>
-              <p className="mt-3 text-gray-400 leading-relaxed flex-1">{s.summary}</p>
-              <span className="mt-6 inline-flex items-center gap-2 text-primary font-medium">
+              <h2 className="mt-6 text-2xl font-bold text-heading">{s.name}</h2>
+              <p className="mt-3 text-muted leading-relaxed flex-1">{s.summary}</p>
+              <span className="mt-6 inline-flex items-center gap-2 text-link font-medium">
                 Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
               </span>
             </Link>

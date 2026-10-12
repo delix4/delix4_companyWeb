@@ -23,7 +23,7 @@ export default function PageHeader({
   const crumbs = [{ name: 'Home', href: '/' }, ...breadcrumbs];
 
   return (
-    <section className="relative overflow-hidden bg-black pt-32 md:pt-40 pb-14 md:pb-20">
+    <section className="relative overflow-hidden bg-page pt-32 md:pt-40 pb-14 md:pb-20">
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -39,16 +39,16 @@ export default function PageHeader({
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[50rem] h-[30rem] bg-primary/10 rounded-full blur-[120px] pointer-events-none" aria-hidden />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-gray-500">
+          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-subtle-fg">
             {crumbs.map((c, i) => (
               <li key={c.href} className="flex items-center gap-1.5">
                 {i > 0 && <ChevronRight className="h-3.5 w-3.5" aria-hidden />}
                 {i === crumbs.length - 1 ? (
-                  <span aria-current="page" className="text-gray-300">
+                  <span aria-current="page" className="text-body">
                     {c.name}
                   </span>
                 ) : (
-                  <Link href={c.href} className="hover:text-white">
+                  <Link href={c.href} className="hover:text-heading">
                     {c.name}
                   </Link>
                 )}
@@ -58,8 +58,8 @@ export default function PageHeader({
         </nav>
         <div className="max-w-3xl">
           {eyebrow && <div className="mb-4">{eyebrow}</div>}
-          <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight text-balance">{title}</h1>
-          {description && <p className="mt-6 text-lg md:text-xl text-gray-400 leading-relaxed">{description}</p>}
+          <h1 className="text-4xl md:text-6xl font-bold text-heading tracking-tight text-balance">{title}</h1>
+          {description && <p className="mt-6 text-lg md:text-xl text-muted leading-relaxed">{description}</p>}
           {children}
         </div>
       </div>

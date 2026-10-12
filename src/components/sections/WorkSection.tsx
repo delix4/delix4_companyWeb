@@ -1,93 +1,58 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { ButtonLink, Section, SectionHeading, Tag } from '@/components/ui/primitives';
+import { ButtonLink, Section, SectionHeading } from '@/components/ui/primitives';
 import Reveal from '@/components/ui/Reveal';
-import CaseStudyCard, { CaseStudyCover, ProjectTypeBadge } from './CaseStudyCard';
-import { caseStudies, featuredCaseStudy } from '@/lib/case-studies';
+import CaseStudyCard, { toCardProject } from './CaseStudyCard';
+import { getPublishedProjects } from '@/lib/content';
 
-export default function WorkSection() {
-  const featured = featuredCaseStudy;
-  const others = caseStudies.filter((c) => c.slug !== featured.slug);
+// Grid and width per number of cards, so one or two projects still sit centred and compact.
+const layout: Record<number, string> = {
+  2: 'sm:grid-cols-2 max-w-3xl',
+  3: 'sm:grid-cols-2 lg:grid-cols-3 max-w-5xl',
+  4: 'sm:grid-cols-2 lg:grid-cols-4 max-w-7xl',
+};
+
+export default async function WorkSection() {
+  const projects = (await getPublishedProjects()).slice(0, 3);
+  if (projects.length === 0) return null;
+  const cards = projects.length + 1;
 
   return (
     <Section id="work" tone="muted" aria-labelledby="work-heading">
       <SectionHeading
         eyebrow="Our work"
         title={<span id="work-heading">Products we have built</span>}
-        description="Every project is labelled honestly — client work, in-house products and R&D — so you know exactly what you are looking at."
+        description="Web, mobile and AI products — each labelled honestly as client work, in-house or R&D."
       />
 
-      <Reveal>
-        <article className="group grid grid-cols-1 lg:grid-cols-2 rounded-3xl border border-white/10 bg-black overflow-hidden hover:border-primary/40 transition-colors">
-          <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[420px] overflow-hidden">
-            <CaseStudyCover study={featured} />
-            <span className="absolute top-5 left-5 rounded-full bg-primary text-black text-xs font-bold px-3 py-1">
-              Flagship AI project
-            </span>
-          </div>
-          <div className="p-7 md:p-10 flex flex-col">
-            <div className="flex flex-wrap items-center gap-2 mb-5">
-              <ProjectTypeBadge type={featured.type} />
-              <span className="text-xs text-gray-500">
-                {featured.category} · {featured.year}
-              </span>
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white">{featured.name}</h3>
-            <p className="mt-4 text-gray-400 leading-relaxed">{featured.tagline}</p>
-
-            <dl className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">Problem</dt>
-                <dd className="mt-1.5 text-sm text-gray-300 line-clamp-4">{featured.problem}</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-wider text-gray-500">Solution</dt>
-                <dd className="mt-1.5 text-sm text-gray-300 line-clamp-4">{featured.solution}</dd>
-              </div>
-            </dl>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {featured.technologies.map((t) => (
-                <Tag key={t}>{t}</Tag>
-              ))}
-            </div>
-
-            <div className="mt-auto pt-8">
-              <ButtonLink href={`/case-studies/${featured.slug}`} arrow>
-                Read the full case study
-              </ButtonLink>
-            </div>
-          </div>
-        </article>
-      </Reveal>
-
-      {others.length > 0 && (
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {others.map((study, i) => (
-            <Reveal key={study.slug} delay={i * 0.08} className="h-full">
-              <CaseStudyCard study={study} />
-            </Reveal>
-          ))}
-          <Reveal delay={0.1} className="h-full">
-            <div className="h-full flex flex-col justify-center rounded-2xl border border-dashed border-white/15 p-8 text-center">
-              <h3 className="text-xl font-bold text-white">Your project could be next</h3>
-              <p className="mt-3 text-gray-400">
-                Tell us what you want to build and we will reply with next steps within 24 hours.
-              </p>
-              <Link
-                href="/contact"
-                className="mt-6 inline-flex items-center justify-center gap-2 text-primary font-medium hover:text-yellow-300"
-              >
-                Start your project <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
+      <div className={`mx-auto grid grid-cols-1 gap-5 ${layout[cards]}`}>
+        {projects.map((p, i) => (
+          <Reveal key={p.slug} delay={i * 0.06} className="h-full">
+            <CaseStudyCard project={toCardProject(p)} />
           </Reveal>
-        </div>
-      )}
+        ))}
+        <Reveal delay={projects.length * 0.06} className="h-full">
+          <div className="theme-dark relative h-full min-h-[300px] overflow-hidden rounded-2xl bg-gradient-to-br from-ink via-[#0f2d5c] to-primary p-6 flex flex-col">
+            <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-accent/25 blur-3xl" aria-hidden />
+            <Image src="/tablogo.png" alt="" width={192} height={192} className="relative h-12 w-12 rounded-xl ring-1 ring-white/15" />
+            <h3 className="relative mt-auto text-xl font-bold text-heading">Your project could be next</h3>
+            <p className="relative mt-2 text-sm text-body leading-relaxed">
+              Tell us what you want to build. We reply within 24 hours.
+            </p>
+            <Link
+              href="/contact"
+              className="relative mt-5 inline-flex items-center gap-2 self-start rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink hover:bg-accent transition-colors"
+            >
+              Start your project <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </Reveal>
+      </div>
 
-      <div className="mt-12 text-center">
-        <ButtonLink href="/case-studies" variant="secondary" arrow>
-          View all case studies
+      <div className="mt-10 text-center">
+        <ButtonLink href="/case-studies" variant="secondary" size="md" arrow>
+          View all projects
         </ButtonLink>
       </div>
     </Section>

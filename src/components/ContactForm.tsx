@@ -30,10 +30,10 @@ const emptyForm = (projectType = ''): FormData => ({
 });
 
 const inputClass = (hasError: boolean) =>
-  `w-full bg-black/60 border rounded-lg px-4 py-3 text-white placeholder:text-gray-600 focus:outline-none focus:ring-1 transition-colors ${
+  `w-full bg-page border rounded-lg px-4 py-3 text-heading placeholder:text-faint focus:outline-none focus:ring-1 transition-colors ${
     hasError
       ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-      : 'border-white/10 focus:border-primary focus:ring-primary'
+      : 'border-line focus:border-primary focus:ring-primary'
   }`;
 
 export default function ContactForm() {
@@ -102,7 +102,7 @@ export default function ContactForm() {
 
   const fieldError = (field: keyof FormData) =>
     errors[field] ? (
-      <p id={`${field}-error`} className="text-red-400 text-sm mt-1.5 flex items-center gap-1">
+      <p id={`${field}-error`} className="text-red-600 text-sm mt-1.5 flex items-center gap-1">
         <AlertCircle className="h-3.5 w-3.5" aria-hidden />
         {errors[field]}
       </p>
@@ -112,12 +112,12 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-white/3 border border-green-500/30 p-8 md:p-10 rounded-2xl text-center" role="status">
+      <div className="bg-card border border-green-500/30 p-8 md:p-10 rounded-2xl text-center" role="status">
         <CheckCircle2 className="h-12 w-12 text-green-500 mx-auto" aria-hidden />
-        <h3 className="mt-5 text-2xl font-bold text-white">Thanks — we have your message</h3>
-        <p className="mt-3 text-gray-400">
+        <h3 className="mt-5 text-2xl font-bold text-heading">Thanks — we have your message</h3>
+        <p className="mt-3 text-muted">
           We will reply {site.responseTime} with questions or next steps. Need to talk sooner?{' '}
-          <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+          <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" className="text-link hover:underline">
             Message us on WhatsApp
           </a>
           .
@@ -125,7 +125,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-6 text-sm text-gray-400 underline hover:text-white"
+          className="mt-6 text-sm text-muted underline hover:text-heading"
         >
           Send another message
         </button>
@@ -134,12 +134,12 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-white/3 border border-white/10 p-6 md:p-8 rounded-2xl">
+    <div className="bg-card border border-line p-6 md:p-8 rounded-2xl">
       <form onSubmit={handleSubmit} className="space-y-5" noValidate>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-              Your name <span className="text-primary">*</span>
+            <label htmlFor="name" className="block text-sm font-medium text-body mb-2">
+              Your name <span className="text-link">*</span>
             </label>
             <input
               id="name"
@@ -156,8 +156,8 @@ export default function ContactForm() {
             {fieldError('name')}
           </div>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-              Work email <span className="text-primary">*</span>
+            <label htmlFor="email" className="block text-sm font-medium text-body mb-2">
+              Work email <span className="text-link">*</span>
             </label>
             <input
               id="email"
@@ -177,8 +177,8 @@ export default function ContactForm() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">
-              Company <span className="text-gray-600">(optional)</span>
+            <label htmlFor="company" className="block text-sm font-medium text-body mb-2">
+              Company <span className="text-faint">(optional)</span>
             </label>
             <input
               id="company"
@@ -192,8 +192,8 @@ export default function ContactForm() {
             />
           </div>
           <div>
-            <label htmlFor="projectType" className="block text-sm font-medium text-gray-300 mb-2">
-              What do you need? <span className="text-primary">*</span>
+            <label htmlFor="projectType" className="block text-sm font-medium text-body mb-2">
+              What do you need? <span className="text-link">*</span>
             </label>
             <select
               id="projectType"
@@ -217,7 +217,7 @@ export default function ContactForm() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="budget" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="budget" className="block text-sm font-medium text-body mb-2">
               Estimated budget
             </label>
             <select id="budget" name="budget" value={formData.budget} onChange={handleChange} className={inputClass(false)}>
@@ -230,7 +230,7 @@ export default function ContactForm() {
             </select>
           </div>
           <div>
-            <label htmlFor="timeline" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="timeline" className="block text-sm font-medium text-body mb-2">
               Timeline
             </label>
             <select id="timeline" name="timeline" value={formData.timeline} onChange={handleChange} className={inputClass(false)}>
@@ -245,8 +245,8 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-            Project details <span className="text-primary">*</span>
+          <label htmlFor="message" className="block text-sm font-medium text-body mb-2">
+            Project details <span className="text-link">*</span>
           </label>
           <textarea
             id="message"
@@ -262,7 +262,7 @@ export default function ContactForm() {
           />
           <div className="flex justify-between items-start">
             {fieldError('message')}
-            <p className="text-gray-600 text-xs ml-auto mt-1.5">
+            <p className="text-faint text-xs ml-auto mt-1.5">
               {formData.message.length}/{MAX_MESSAGE}
             </p>
           </div>
@@ -272,8 +272,8 @@ export default function ContactForm() {
           <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 flex items-start gap-3" role="alert">
             <AlertCircle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" aria-hidden />
             <div>
-              <p className="text-red-300 font-medium">Your message could not be sent</p>
-              <p className="text-red-300/80 text-sm">
+              <p className="text-red-700 font-medium">Your message could not be sent</p>
+              <p className="text-red-700/80 text-sm">
                 Please try again, or email us at{' '}
                 <a href={`mailto:${site.email}`} className="underline">
                   {site.email}
@@ -287,7 +287,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="w-full bg-primary text-black font-semibold py-3.5 px-4 rounded-full hover:bg-yellow-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-primary text-white font-semibold py-3.5 px-4 rounded-full hover:bg-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {status === 'loading' ? (
             <>
@@ -298,10 +298,10 @@ export default function ContactForm() {
             'Send Project Details'
           )}
         </button>
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-subtle-fg text-center">
           We reply {site.responseTime}. Your details are only used to respond to your enquiry — see
           our{' '}
-          <Link href="/privacy" className="underline hover:text-gray-300">
+          <Link href="/privacy" className="underline hover:text-body">
             privacy policy
           </Link>
           .

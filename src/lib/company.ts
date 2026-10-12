@@ -19,17 +19,20 @@ export interface TeamMember {
 // TODO: add founders and team members.
 export const team: TeamMember[] = [];
 
+/** Client testimonials are managed from /admin/testimonials (publish only with the client's permission). */
 export interface Testimonial {
+  id: string;
   quote: string;
   name: string;
   role: string;
   company: string;
-  /** Link to the related case study, if any. */
+  /** 1–5 stars. */
+  rating: number;
+  /** Slug of the related case study, if any. */
   caseStudy?: string;
+  published: boolean;
+  createdAt: string;
 }
-
-// TODO: add client testimonials (with the client's written permission).
-export const testimonials: Testimonial[] = [];
 
 export interface Achievement {
   title: string;

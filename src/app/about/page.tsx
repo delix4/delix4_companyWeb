@@ -26,8 +26,8 @@ export default function AboutPage() {
 
       <Section className="pt-0! md:pt-0!">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="space-y-5 text-lg text-gray-400 leading-relaxed">
-            <h2 className="text-3xl font-bold text-white">Who we are</h2>
+          <div className="space-y-5 text-lg text-muted leading-relaxed">
+            <h2 className="text-3xl font-bold text-heading">Who we are</h2>
             <p>
               We are engineers who enjoy building products that people actually use. Our work spans
               modern web platforms, cross-platform mobile apps and applied machine learning — from
@@ -51,10 +51,10 @@ export default function AboutPage() {
         <SectionHeading eyebrow="What makes us different" title="How we work with clients" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {differentiators.map((d) => (
-            <div key={d.title} className="rounded-2xl border border-white/10 bg-black p-7">
-              <d.icon className="h-6 w-6 text-primary" aria-hidden />
-              <h3 className="mt-4 text-xl font-bold text-white">{d.title}</h3>
-              <p className="mt-2 text-gray-400 leading-relaxed">{d.description}</p>
+            <div key={d.title} className="rounded-2xl border border-line bg-page p-7">
+              <d.icon className="h-6 w-6 text-link" aria-hidden />
+              <h3 className="mt-4 text-xl font-bold text-heading">{d.title}</h3>
+              <p className="mt-2 text-muted leading-relaxed">{d.description}</p>
             </div>
           ))}
         </div>

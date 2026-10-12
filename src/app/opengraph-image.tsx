@@ -16,21 +16,21 @@ export default function OpengraphImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: 80,
-          background: 'radial-gradient(circle at 20% 0%, rgba(255,215,0,0.25), #000 60%)',
+          background: 'radial-gradient(circle at 85% 0%, rgba(0,212,255,0.35), rgba(37,99,235,0.25) 35%, #0B1F3A 70%)',
           color: '#fff',
           fontFamily: 'sans-serif',
         }}
       >
-        <div style={{ fontSize: 44, fontWeight: 700, color: '#ffd700' }}>Delix4</div>
+        <div style={{ fontSize: 44, fontWeight: 700, color: '#00D4FF' }}>Delix4</div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ fontSize: 72, fontWeight: 700, lineHeight: 1.1, maxWidth: 950 }}>
             Building digital products that help businesses grow
           </div>
-          <div style={{ marginTop: 28, fontSize: 32, color: '#9ca3af' }}>
+          <div style={{ marginTop: 28, fontSize: 32, color: '#A3B3C9' }}>
             Web Development · Mobile Apps · AI Solutions
           </div>
         </div>
-        <div style={{ fontSize: 28, color: '#9ca3af' }}>delix4.com</div>
+        <div style={{ fontSize: 28, color: '#A3B3C9' }}>delix4.com</div>
       </div>
     ),
     size

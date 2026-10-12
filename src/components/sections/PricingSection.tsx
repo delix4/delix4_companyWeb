@@ -19,32 +19,32 @@ export default function PricingSection({ headingLevel = 'h2' }: { headingLevel?:
             <div
               className={`relative h-full flex flex-col rounded-2xl p-7 border ${
                 pkg.highlighted
-                  ? 'border-primary/60 bg-primary/4 shadow-[0_0_40px_rgba(255,215,0,0.08)]'
-                  : 'border-white/10 bg-white/3'
+                  ? 'border-primary/60 bg-primary/4 shadow-[0_0_40px_rgba(37,99,235,0.08)]'
+                  : 'border-line bg-card'
               }`}
             >
               {pkg.highlighted && (
-                <span className="absolute -top-3 left-7 rounded-full bg-primary text-black text-xs font-bold px-3 py-1">
+                <span className="absolute -top-3 left-7 rounded-full bg-primary text-white text-xs font-bold px-3 py-1">
                   Most requested
                 </span>
               )}
-              <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
-              <p className="mt-2 text-sm text-gray-400 min-h-[2.5rem]">{pkg.description}</p>
+              <h3 className="text-xl font-bold text-heading">{pkg.name}</h3>
+              <p className="mt-2 text-sm text-muted min-h-[2.5rem]">{pkg.description}</p>
               <div className="mt-6">
                 {pkg.startingFrom ? (
                   <>
-                    <span className="block text-xs uppercase tracking-wider text-gray-500">Starting from</span>
-                    <span className="text-3xl font-bold text-white">{pkg.startingFrom}</span>
+                    <span className="block text-xs uppercase tracking-wider text-subtle-fg">Starting from</span>
+                    <span className="text-3xl font-bold text-heading">{pkg.startingFrom}</span>
                   </>
                 ) : (
-                  <span className="text-3xl font-bold text-white">Custom quote</span>
+                  <span className="text-3xl font-bold text-heading">Custom quote</span>
                 )}
-                <span className="block mt-1 text-sm text-gray-500">{pkg.timeline}</span>
+                <span className="block mt-1 text-sm text-subtle-fg">{pkg.timeline}</span>
               </div>
               <ul className="mt-6 space-y-2.5 flex-1">
                 {pkg.includes.map((item) => (
-                  <li key={item} className="flex gap-2 text-sm text-gray-300">
-                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" aria-hidden />
+                  <li key={item} className="flex gap-2 text-sm text-body">
+                    <Check className="h-4 w-4 text-link shrink-0 mt-0.5" aria-hidden />
                     {item}
                   </li>
                 ))}
@@ -61,7 +61,7 @@ export default function PricingSection({ headingLevel = 'h2' }: { headingLevel?:
           </Reveal>
         ))}
       </div>
-      <p className="mt-8 text-center text-sm text-gray-500">
+      <p className="mt-8 text-center text-sm text-subtle-fg">
         Free initial consultation · Itemised estimate · You own the code
       </p>
     </Section>

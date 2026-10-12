@@ -19,18 +19,26 @@ const socials = [
   { name: 'Instagram', href: site.social.instagram, icon: Instagram },
 ].filter((s) => s.href);
 
-const linkClass = 'text-gray-400 hover:text-primary transition-colors text-sm';
+const linkClass = 'text-muted hover:text-link transition-colors text-sm';
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t border-white/10 text-white">
+    <footer className="theme-dark bg-page border-t border-line text-heading">
       <div className="max-w-7xl mx-auto pt-16 pb-28 md:pb-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] gap-12">
           <div>
-            <Link href="/" aria-label="Delix4 home">
-              <Image src="/logo.png" alt="Delix4" width={280} height={130} className="h-20 w-auto object-contain -ml-2" />
+            <Link href="/" aria-label="Delix4 home" className="inline-flex items-center gap-3">
+              <Image src="/tablogo.png" alt="" width={192} height={192} className="h-14 w-14 rounded-2xl ring-1 ring-white/10" />
+              <span className="flex flex-col leading-none">
+                <span className="text-3xl font-bold tracking-tight text-heading">
+                  Delix<span className="text-accent">4</span>
+                </span>
+                <span className="mt-1.5 text-[0.6rem] font-medium tracking-[0.3em] text-subtle-fg uppercase">
+                  Software Solutions
+                </span>
+              </span>
             </Link>
-            <p className="mt-4 text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="mt-4 text-muted text-sm leading-relaxed max-w-xs">
               Delix4 is a software development company building web applications, mobile apps and
               AI solutions for startups and growing businesses.
             </p>
@@ -42,7 +50,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Delix4 on ${s.name}`}
-                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/40 transition-colors"
+                    className="w-10 h-10 rounded-full border border-line flex items-center justify-center text-muted hover:text-link hover:border-primary/40 transition-colors"
                   >
                     <s.icon className="h-4 w-4" aria-hidden />
                   </a>
@@ -52,7 +60,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-white">Services</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-heading">Services</h2>
             <ul className="mt-5 space-y-3">
               {services.map((s) => (
                 <li key={s.slug}>
@@ -65,7 +73,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-white">Company</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-heading">Company</h2>
             <ul className="mt-5 space-y-3">
               {companyLinks.map((l) => (
                 <li key={l.href}>
@@ -78,7 +86,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-white">Contact</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-heading">Contact</h2>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
                 <a href={`mailto:${site.email}`} className={`${linkClass} inline-flex items-center gap-2`}>
@@ -95,31 +103,31 @@ const Footer = () => {
                   <MessageCircle className="h-4 w-4" aria-hidden /> WhatsApp
                 </a>
               </li>
-              <li className="inline-flex items-center gap-2 text-gray-400">
+              <li className="inline-flex items-center gap-2 text-muted">
                 <MapPin className="h-4 w-4" aria-hidden /> {site.location}
               </li>
             </ul>
             <Link
               href="/contact"
-              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-black hover:bg-yellow-300 transition-colors"
+              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors"
             >
               Start Your Project
             </Link>
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/10 pt-8 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-gray-500 text-sm">
+        <div className="mt-14 border-t border-line pt-8 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
+          <p className="text-subtle-fg text-sm">
             &copy; {new Date().getFullYear()} Delix4. All rights reserved.
           </p>
           <ul className="flex gap-6 text-sm">
             <li>
-              <Link href="/privacy" className="text-gray-500 hover:text-white">
+              <Link href="/privacy" className="text-subtle-fg hover:text-heading">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="text-gray-500 hover:text-white">
+              <Link href="/terms" className="text-subtle-fg hover:text-heading">
                 Terms &amp; Conditions
               </Link>
             </li>

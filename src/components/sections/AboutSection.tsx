@@ -27,18 +27,18 @@ export const differentiators = [
 export function MissionVision() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="rounded-2xl border border-white/10 bg-white/3 p-7">
-        <Target className="h-6 w-6 text-primary" aria-hidden />
-        <h3 className="mt-4 text-xl font-bold text-white">Our mission</h3>
-        <p className="mt-2 text-gray-400 leading-relaxed">
+      <div className="rounded-2xl border border-line bg-card p-7">
+        <Target className="h-6 w-6 text-link" aria-hidden />
+        <h3 className="mt-4 text-xl font-bold text-heading">Our mission</h3>
+        <p className="mt-2 text-muted leading-relaxed">
           To help startups and businesses turn ideas into reliable digital products — built with
           care, delivered on time and designed to grow with them.
         </p>
       </div>
-      <div className="rounded-2xl border border-white/10 bg-white/3 p-7">
-        <Telescope className="h-6 w-6 text-primary" aria-hidden />
-        <h3 className="mt-4 text-xl font-bold text-white">Our vision</h3>
-        <p className="mt-2 text-gray-400 leading-relaxed">
+      <div className="rounded-2xl border border-line bg-card p-7">
+        <Telescope className="h-6 w-6 text-link" aria-hidden />
+        <h3 className="mt-4 text-xl font-bold text-heading">Our vision</h3>
+        <p className="mt-2 text-muted leading-relaxed">
           To be the engineering partner growing companies trust for web, mobile and AI — known for
           quality work and straightforward communication.
         </p>
@@ -57,7 +57,7 @@ export default function AboutSection() {
             eyebrow="About Delix4"
             title={<span id="about-heading">Small team. Direct communication. High-quality engineering.</span>}
           />
-          <div className="-mt-6 space-y-4 text-gray-400 text-lg leading-relaxed">
+          <div className="-mt-6 space-y-4 text-muted text-lg leading-relaxed">
             <p>
               Delix4 is a software development company based in Colombo, Sri Lanka, working with
               clients worldwide. We design and build web applications, mobile apps and AI-powered
@@ -79,25 +79,25 @@ export default function AboutSection() {
         <div className="space-y-4">
           {differentiators.map((d, i) => (
             <Reveal key={d.title} delay={i * 0.08}>
-              <div className="flex gap-5 rounded-2xl border border-white/10 bg-white/3 p-6">
-                <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+              <div className="flex gap-5 rounded-2xl border border-line bg-card p-6">
+                <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/10 text-link flex items-center justify-center">
                   <d.icon className="h-5 w-5" aria-hidden />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">{d.title}</h3>
-                  <p className="mt-1 text-gray-400 leading-relaxed">{d.description}</p>
+                  <h3 className="text-lg font-semibold text-heading">{d.title}</h3>
+                  <p className="mt-1 text-muted leading-relaxed">{d.description}</p>
                 </div>
               </div>
             </Reveal>
           ))}
           <Reveal delay={0.24}>
-            <div className="flex gap-5 rounded-2xl border border-white/10 bg-white/3 p-6">
-              <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+            <div className="flex gap-5 rounded-2xl border border-line bg-card p-6">
+              <div className="shrink-0 w-11 h-11 rounded-xl bg-primary/10 text-link flex items-center justify-center">
                 <Compass className="h-5 w-5" aria-hidden />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">Product thinking</h3>
-                <p className="mt-1 text-gray-400 leading-relaxed">
+                <h3 className="text-lg font-semibold text-heading">Product thinking</h3>
+                <p className="mt-1 text-muted leading-relaxed">
                   We care about business outcomes, not just shipping features — and will challenge
                   ideas that do not serve your users.
                 </p>

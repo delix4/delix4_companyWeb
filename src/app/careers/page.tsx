@@ -38,7 +38,7 @@ const jobs = [
 
 export default function CareersPage() {
   return (
-    <div className="min-h-screen bg-black pt-24 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-page pt-24 pb-20 relative overflow-hidden">
       {/* Background Gradients */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
 
@@ -50,13 +50,13 @@ export default function CareersPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-24"
         >
-          <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-sm font-medium mb-6">
+          <div className="inline-block px-4 py-2 rounded-full bg-subtle border border-line text-link text-sm font-medium mb-6">
             We&apos;re Hiring
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Build real products <span className="text-primary">with us</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-heading mb-6">
+            Build real products <span className="text-link">with us</span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted max-w-2xl mx-auto">
             We&apos;re a small, remote-first team building web, mobile and AI products for clients
             worldwide. If you care about quality engineering and want to learn fast, we&apos;d
             love to hear from you.
@@ -69,7 +69,7 @@ export default function CareersPage() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold text-white text-center mb-12"
+            className="text-3xl font-bold text-heading text-center mb-12"
           >
             Why Delix4?
           </motion.h2>
@@ -81,13 +81,13 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors"
+                className="bg-subtle border border-line p-6 rounded-2xl hover:bg-fill transition-colors"
               >
-                <div className="bg-primary/20 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-primary">
+                <div className="bg-primary/20 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-link">
                   <perk.icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{perk.title}</h3>
-                <p className="text-gray-400 text-sm">{perk.desc}</p>
+                <h3 className="text-xl font-bold text-heading mb-2">{perk.title}</h3>
+                <p className="text-muted text-sm">{perk.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -102,12 +102,12 @@ export default function CareersPage() {
             className="flex flex-col md:flex-row justify-between items-end mb-12"
           >
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">Open Positions</h2>
-              <p className="text-gray-400">Current openings at Delix4.</p>
+              <h2 className="text-3xl font-bold text-heading mb-2">Open Positions</h2>
+              <p className="text-muted">Current openings at Delix4.</p>
             </div>
             <Link
               href="/contact"
-              className="hidden md:flex items-center text-primary hover:text-white transition-colors mt-4 md:mt-0"
+              className="hidden md:flex items-center text-link hover:text-heading transition-colors mt-4 md:mt-0"
             >
               Contact for general inquiries <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -121,17 +121,17 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-primary/50 transition-all flex flex-col md:flex-row items-center justify-between"
+                className="group bg-subtle border border-line p-6 rounded-2xl hover:border-primary/50 transition-all flex flex-col md:flex-row items-center justify-between"
               >
                 <div className="flex items-center gap-6 mb-4 md:mb-0 w-full md:w-auto">
-                  <div className="bg-gray-800 p-3 rounded-xl">
-                    <Briefcase className="h-6 w-6 text-gray-300" />
+                  <div className="bg-fill p-3 rounded-xl">
+                    <Briefcase className="h-6 w-6 text-body" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-bold text-heading group-hover:text-link transition-colors">
                       {job.title}
                     </h3>
-                    <div className="flex gap-4 text-sm text-gray-400 mt-1">
+                    <div className="flex gap-4 text-sm text-muted mt-1">
                       <span>{job.department}</span>
                       <span>•</span>
                       <span>{job.location}</span>
@@ -142,7 +142,7 @@ export default function CareersPage() {
                 </div>
                 <Link
                   href="/contact"
-                  className="w-full md:w-auto px-6 py-3 bg-white text-black font-bold rounded-lg hover:bg-primary transition-colors text-center"
+                  className="w-full md:w-auto px-6 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-colors text-center"
                 >
                   Apply Now
                 </Link>

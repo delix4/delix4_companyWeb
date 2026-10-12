@@ -26,9 +26,9 @@ export function ContactDetails() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 rounded-2xl border border-primary/30 bg-primary/5 p-5">
-        <Clock className="h-5 w-5 text-primary shrink-0" aria-hidden />
-        <p className="text-sm text-gray-300">
-          <span className="text-white font-semibold">We reply {site.responseTime}</span> on
+        <Clock className="h-5 w-5 text-link shrink-0" aria-hidden />
+        <p className="text-sm text-body">
+          <span className="text-heading font-semibold">We reply {site.responseTime}</span> on
           business days, usually much sooner.
         </p>
       </div>
@@ -39,22 +39,22 @@ export function ContactDetails() {
             <a
               href={c.href}
               {...(c.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-white/3 p-5 hover:border-primary/40 transition-colors"
+              className="group flex items-center gap-4 rounded-2xl border border-line bg-card p-5 hover:border-primary/40 transition-colors"
             >
-              <span className="w-11 h-11 rounded-xl bg-white/5 text-white flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+              <span className="w-11 h-11 rounded-xl bg-subtle text-heading flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                 <c.icon className="h-5 w-5" aria-hidden />
               </span>
               <span>
-                <span className="block text-xs text-gray-500">{c.label}</span>
-                <span className="block text-white font-medium">{c.value}</span>
+                <span className="block text-xs text-subtle-fg">{c.label}</span>
+                <span className="block text-heading font-medium">{c.value}</span>
               </span>
             </a>
           </li>
         ))}
       </ul>
 
-      <div className="flex items-center gap-3 px-1 text-sm text-gray-400">
-        <MapPin className="h-4 w-4 text-primary" aria-hidden />
+      <div className="flex items-center gap-3 px-1 text-sm text-muted">
+        <MapPin className="h-4 w-4 text-link" aria-hidden />
         {site.location} · Working with clients worldwide
       </div>
 
@@ -66,7 +66,7 @@ export function ContactDetails() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Delix4 on ${s.label}`}
-            className="w-11 h-11 rounded-full border border-white/10 bg-white/3 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/40 transition-colors"
+            className="w-11 h-11 rounded-full border border-line bg-card flex items-center justify-center text-muted hover:text-link hover:border-primary/40 transition-colors"
           >
             <s.icon className="h-5 w-5" aria-hidden />
           </a>
@@ -78,7 +78,7 @@ export function ContactDetails() {
 
 export function ContactFormWithFallback() {
   return (
-    <Suspense fallback={<div className="min-h-[600px] rounded-2xl border border-white/10 bg-white/3" />}>
+    <Suspense fallback={<div className="min-h-[600px] rounded-2xl border border-line bg-card" />}>
       <ContactForm />
     </Suspense>
   );

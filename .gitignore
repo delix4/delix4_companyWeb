@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local content store used when not running on Netlify (admin projects, testimonials, uploads)
+/.data/
