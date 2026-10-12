@@ -210,7 +210,7 @@ export async function POST(request: Request) {
         <html>
           <body style="font-family: Arial, sans-serif; color: #333;">
             <div style="max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #ffd700; border-bottom: 2px solid #ffd700; padding-bottom: 10px;">New Contact Form Submission</h2>
+              <h2 style="color: #0B1F3A; border-bottom: 2px solid #2563EB; padding-bottom: 10px;">New Contact Form Submission</h2>
               <p><strong>Name:</strong> ${htmlName}</p>
               <p><strong>Email:</strong> ${htmlEmail}</p>
               <p><strong>Subject:</strong> ${htmlSubject}</p>

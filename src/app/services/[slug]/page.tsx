@@ -5,12 +5,12 @@ import { Check } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import { ButtonLink, JsonLd, Section, SectionHeading, Tag } from '@/components/ui/primitives';
 import ServiceIcon from '@/components/sections/ServiceIcon';
-import CaseStudyCard from '@/components/sections/CaseStudyCard';
+import CaseStudyCard, { toCardProject } from '@/components/sections/CaseStudyCard';
 import ProcessSection from '@/components/sections/ProcessSection';
 import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import { getService, services } from '@/lib/services';
-import { getCaseStudy, type CaseStudy } from '@/lib/case-studies';
+import { getPublishedProjects } from '@/lib/content';
 import { site } from '@/lib/site';
 
 export const dynamicParams = false;
@@ -40,9 +40,11 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
   const service = getService(slug);
   if (!service) notFound();
 
-  const related = service.relatedCaseStudies
-    .map(getCaseStudy)
-    .filter((c): c is CaseStudy => Boolean(c));
+  const projects = await getPublishedProjects();
+  // Projects tagged with this service, plus any hand-picked related case studies.
+  const related = projects.filter(
+    (p) => p.service === service.slug || service.relatedCaseStudies.includes(p.slug)
+  );
   const otherServices = services.filter((s) => s.slug !== service.slug);
 
   return (
@@ -65,7 +67,7 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
           { name: service.name, href: `/services/${service.slug}` },
         ]}
         eyebrow={
-          <span className="inline-flex items-center gap-2 text-primary text-sm font-semibold uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 text-link text-sm font-semibold uppercase tracking-widest">
             <ServiceIcon slug={service.slug} className="h-4 w-4" /> {service.name}
           </span>
         }
@@ -85,16 +87,16 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
       <Section tone="muted">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-3xl font-bold text-white">What we build</h2>
+            <h2 className="text-3xl font-bold text-heading">What we build</h2>
             <ul className="mt-6 space-y-3">
               {service.whatWeBuild.map((item) => (
-                <li key={item} className="flex gap-3 text-gray-300 text-lg">
-                  <Check className="h-5 w-5 text-primary shrink-0 mt-1" aria-hidden />
+                <li key={item} className="flex gap-3 text-body text-lg">
+                  <Check className="h-5 w-5 text-link shrink-0 mt-1" aria-hidden />
                   {item}
                 </li>
               ))}
             </ul>
-            <h3 className="mt-10 text-sm font-semibold uppercase tracking-wider text-gray-500">
+            <h3 className="mt-10 text-sm font-semibold uppercase tracking-wider text-subtle-fg">
               Key technologies
             </h3>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -104,10 +106,10 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
             </div>
           </div>
           <div>
-            <h2 className="text-3xl font-bold text-white">Typical use cases</h2>
+            <h2 className="text-3xl font-bold text-heading">Typical use cases</h2>
             <ul className="mt-6 space-y-4">
               {service.useCases.map((u) => (
-                <li key={u} className="rounded-2xl border border-white/10 bg-black p-5 text-gray-300">
+                <li key={u} className="rounded-2xl border border-line bg-page p-5 text-body">
                   {u}
                 </li>
               ))}
@@ -120,9 +122,9 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
         <SectionHeading eyebrow="Outcomes" title="What you get" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {service.benefits.map((b) => (
-            <div key={b.title} className="rounded-2xl border border-white/10 bg-white/3 p-7">
-              <h3 className="text-xl font-bold text-white">{b.title}</h3>
-              <p className="mt-3 text-gray-400 leading-relaxed">{b.description}</p>
+            <div key={b.title} className="rounded-2xl border border-line bg-card p-7">
+              <h3 className="text-xl font-bold text-heading">{b.title}</h3>
+              <p className="mt-3 text-muted leading-relaxed">{b.description}</p>
             </div>
           ))}
         </div>
@@ -131,9 +133,9 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
       {related.length > 0 && (
         <Section tone="muted">
           <SectionHeading eyebrow="Related work" title="See it in practice" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {related.map((c) => (
-              <CaseStudyCard key={c.slug} study={c} />
+              <CaseStudyCard key={c.slug} project={toCardProject(c)} />
             ))}
           </div>
         </Section>
@@ -143,13 +145,13 @@ export default async function ServicePage({ params }: PageProps<'/services/[slug
       <FAQSection tone="default" />
 
       <Section tone="muted" className="py-14! md:py-16!">
-        <h2 className="text-xl font-bold text-white">Other services</h2>
+        <h2 className="text-xl font-bold text-heading">Other services</h2>
         <ul className="mt-5 flex flex-wrap gap-3">
           {otherServices.map((s) => (
             <li key={s.slug}>
               <Link
                 href={`/services/${s.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-gray-300 hover:text-primary hover:border-primary/40"
+                className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-body hover:text-link hover:border-primary/40"
               >
                 <ServiceIcon slug={s.slug} className="h-4 w-4" /> {s.name}
               </Link>

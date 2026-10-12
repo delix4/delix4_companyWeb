@@ -26,15 +26,15 @@ export default function FAQSection({ tone = 'muted' }: { tone?: 'default' | 'mut
           <details
             key={faq.question}
             open={i === 0}
-            className="group rounded-2xl border border-white/10 bg-white/3 open:bg-white/5 transition-colors"
+            className="group rounded-2xl border border-line bg-card open:bg-subtle transition-colors"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 p-6 text-left text-lg font-medium text-white [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 p-6 text-left text-lg font-medium text-heading [&::-webkit-details-marker]:hidden">
               {faq.question}
-              <span className="shrink-0 rounded-full bg-white/10 p-1 text-white transition-transform group-open:rotate-45 group-open:bg-primary group-open:text-black">
+              <span className="shrink-0 rounded-full bg-fill p-1 text-heading transition-transform group-open:rotate-45 group-open:bg-primary group-open:text-white">
                 <Plus className="h-4 w-4" aria-hidden />
               </span>
             </summary>
-            <p className="px-6 pb-6 -mt-2 text-gray-400 leading-relaxed">{faq.answer}</p>
+            <p className="px-6 pb-6 -mt-2 text-muted leading-relaxed">{faq.answer}</p>
           </details>
         ))}
       </div>

@@ -21,6 +21,10 @@ export interface CaseStudy {
   service: ServiceSlug;
   year: number;
   featured: boolean;
+  /** Drafts are only visible in the admin panel. */
+  published: boolean;
+  /** Optional client or organisation name shown on the project. */
+  client?: string;
   tagline: string;
   metaDescription: string;
   problem: string;
@@ -40,7 +44,18 @@ export interface CaseStudy {
   links?: { label: string; href: string }[];
 }
 
-export const caseStudies: CaseStudy[] = [
+export const serviceOptions: { value: ServiceSlug; label: string }[] = [
+  { value: 'web-development', label: 'Web Development' },
+  { value: 'mobile-app-development', label: 'Mobile Apps' },
+  { value: 'ai-development', label: 'AI Solutions' },
+  { value: 'software-development', label: 'Custom Software' },
+];
+
+/**
+ * Initial projects. The live list is managed from /admin and kept in the content store;
+ * these are used until the first change is saved there.
+ */
+export const seedCaseStudies: CaseStudy[] = [
   {
     slug: 'ai-hydration-monitoring',
     name: 'AI-Powered Hydration Monitoring',
@@ -49,6 +64,7 @@ export const caseStudies: CaseStudy[] = [
     service: 'ai-development',
     year: 2026,
     featured: true,
+    published: true,
     tagline:
       'A mobile health app that predicts hydration needs with machine learning and detects signs of dehydration from a photo.',
     metaDescription:
@@ -105,6 +121,7 @@ export const caseStudies: CaseStudy[] = [
     service: 'web-development',
     year: 2026,
     featured: false,
+    published: true,
     tagline:
       'Our own company platform — a fast, SEO-ready Next.js site with a secure lead-capture pipeline.',
     metaDescription:
@@ -152,6 +169,3 @@ export const caseStudies: CaseStudy[] = [
     links: [{ label: 'Visit delix4.com', href: 'https://delix4.com' }],
   },
 ];
-
-export const getCaseStudy = (slug: string) => caseStudies.find((c) => c.slug === slug);
-export const featuredCaseStudy = caseStudies.find((c) => c.featured) ?? caseStudies[0];

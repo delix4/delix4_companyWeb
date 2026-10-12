@@ -20,13 +20,13 @@ export default function ProcessSection() {
         {process.map((step, i) => (
           <li key={step.title} className="relative">
             <Reveal delay={i * 0.08} className="flex md:flex-col gap-5 md:gap-0 md:text-center">
-              <div className="relative z-10 shrink-0 md:mx-auto w-12 h-12 rounded-full bg-black border border-primary/50 text-primary font-bold flex items-center justify-center shadow-[0_0_24px_rgba(255,215,0,0.15)]">
+              <div className="relative z-10 shrink-0 md:mx-auto w-12 h-12 rounded-full bg-page border border-primary/50 text-link font-bold flex items-center justify-center shadow-[0_0_24px_rgba(37,99,235,0.15)]">
                 {String(i + 1).padStart(2, '0')}
               </div>
               <div className="md:mt-6">
-                <h3 className="text-lg font-bold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm text-gray-400 leading-relaxed">{step.description}</p>
-                <p className="mt-3 inline-block text-xs font-medium text-primary/90 bg-primary/10 rounded-full px-3 py-1">
+                <h3 className="text-lg font-bold text-heading">{step.title}</h3>
+                <p className="mt-2 text-sm text-muted leading-relaxed">{step.description}</p>
+                <p className="mt-3 inline-block text-xs font-medium text-link/90 bg-primary/10 rounded-full px-3 py-1">
                   {step.deliverable}
                 </p>
               </div>

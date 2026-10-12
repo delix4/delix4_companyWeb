@@ -1,28 +1,94 @@
 @import 'tailwindcss';
 
+/*
+ * Delix4 brand palette
+ *   Primary (navy)  #0B1F3A — trust, stability
+ *   Brand blue      #2563EB — technology, reliability
+ *   Accent (cyan)   #00D4FF — innovation, growth
+ *   Background      #F4F7FB — clean, minimal
+ *
+ * Surface/text tokens default to the light theme. Wrap a block in `.theme-dark`
+ * to render the same markup on navy (hero mock-ups, CTA band, footer).
+ */
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --primary: #ffd700;
-  --primary-foreground: #000000;
-  --secondary: #1f2937;
-  --secondary-foreground: #ffffff;
+  --ink: #0b1f3a;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent: #00d4ff;
+
+  --page: #f4f7fb;
+  --page-alt: #ffffff;
+  --card: #ffffff;
+  --subtle: #eef3f9;
+  --fill: #e2e8f0;
+
+  --fg: #0b1f3a;
+  --fg-body: #334155;
+  --fg-muted: #475569;
+  --fg-subtle: #64748b;
+  --fg-faint: #94a3b8;
+
+  --line: #e2e8f0;
+  --line-soft: #eef2f7;
+  --line-strong: #cbd5e1;
+
+  --link: #2563eb;
+  --link-hover: #1d4ed8;
+}
+
+.theme-dark {
+  --page: #0b1f3a;
+  --page-alt: #081a33;
+  --card: rgb(255 255 255 / 0.04);
+  --subtle: rgb(255 255 255 / 0.06);
+  --fill: rgb(255 255 255 / 0.1);
+
+  --fg: #ffffff;
+  --fg-body: #cbd5e1;
+  --fg-muted: #a3b3c9;
+  --fg-subtle: #8394ad;
+  --fg-faint: #5e7090;
+
+  --line: rgb(255 255 255 / 0.12);
+  --line-soft: rgb(255 255 255 / 0.06);
+  --line-strong: rgb(255 255 255 / 0.2);
+
+  --link: #00d4ff;
+  --link-hover: #67e5ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+
+  --color-page: var(--page);
+  --color-page-alt: var(--page-alt);
+  --color-card: var(--card);
+  --color-subtle: var(--subtle);
+  --color-fill: var(--fill);
+
+  --color-heading: var(--fg);
+  --color-body: var(--fg-body);
+  --color-muted: var(--fg-muted);
+  --color-subtle-fg: var(--fg-subtle);
+  --color-faint: var(--fg-faint);
+
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-line-strong: var(--line-strong);
+
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+
   --font-sans: var(--font-sans), sans-serif;
   --font-mono: var(--font-mono), monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--page);
+  color: var(--fg-body);
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -36,12 +102,13 @@ section[id] {
 }
 
 ::selection {
-  background: rgb(255 215 0 / 0.3);
-  color: #fff;
+  background: rgb(37 99 235 / 0.2);
+  color: var(--ink);
 }
 
 select option {
-  background: #0a0a0a;
+  background: var(--page-alt);
+  color: var(--fg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -131,14 +198,14 @@ textarea:focus-visible {
 .prose-delix h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--fg);
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
 }
 
 .prose-delix p,
 .prose-delix li {
-  color: #9ca3af;
+  color: var(--fg-muted);
   line-height: 1.75;
 }
 
@@ -157,6 +224,6 @@ textarea:focus-visible {
 }
 
 .prose-delix a {
-  color: var(--primary);
+  color: var(--link);
   text-decoration: underline;
 }

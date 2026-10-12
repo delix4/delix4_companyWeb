@@ -1,7 +1,7 @@
 import { Bot, Brain, Eye, LineChart, Plug, Workflow } from 'lucide-react';
 import { ButtonLink, Section, SectionHeading } from '@/components/ui/primitives';
 import Reveal from '@/components/ui/Reveal';
-import { getCaseStudy } from '@/lib/case-studies';
+import { getPublishedProject } from '@/lib/content';
 
 const capabilities = [
   {
@@ -36,8 +36,8 @@ const capabilities = [
   },
 ];
 
-export default function AISection() {
-  const hydration = getCaseStudy('ai-hydration-monitoring');
+export default async function AISection() {
+  const hydration = await getPublishedProject('ai-hydration-monitoring');
 
   return (
     <Section id="ai" aria-labelledby="ai-heading" className="overflow-hidden">
@@ -53,19 +53,19 @@ export default function AISection() {
 
           {hydration && (
             <div className="rounded-2xl border border-primary/20 bg-primary/4 p-6 -mt-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-primary">In practice</p>
-              <h3 className="mt-2 text-lg font-bold text-white">{hydration.name}</h3>
-              <p className="mt-2 text-sm text-gray-400 leading-relaxed">
-                Two models working together: <span className="text-white">XGBoost</span>{" "}forecasts
-                each user&apos;s hydration needs, while a <span className="text-white">MobileNetV2</span>{' '}
+              <p className="text-xs font-semibold uppercase tracking-wider text-link">In practice</p>
+              <h3 className="mt-2 text-lg font-bold text-heading">{hydration.name}</h3>
+              <p className="mt-2 text-sm text-muted leading-relaxed">
+                Two models working together: <span className="text-heading">XGBoost</span>{" "}forecasts
+                each user&apos;s hydration needs, while a <span className="text-heading">MobileNetV2</span>{' '}
                 vision model detects signs of dehydration from a lip photo.
               </p>
               {hydration.metrics.length > 0 && (
                 <dl className="mt-4 grid grid-cols-2 gap-4">
                   {hydration.metrics.map((m) => (
                     <div key={m.label} className="flex flex-col-reverse">
-                      <dt className="text-xs text-gray-500">{m.label}</dt>
-                      <dd className="text-2xl font-bold text-white">{m.value}</dd>
+                      <dt className="text-xs text-subtle-fg">{m.label}</dt>
+                      <dd className="text-2xl font-bold text-heading">{m.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -80,10 +80,10 @@ export default function AISection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {capabilities.map((c, i) => (
             <Reveal key={c.title} delay={(i % 2) * 0.08}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/3 p-6 hover:border-primary/40 transition-colors">
-                <c.icon className="h-6 w-6 text-primary" aria-hidden />
-                <h3 className="mt-4 text-lg font-semibold text-white">{c.title}</h3>
-                <p className="mt-2 text-sm text-gray-400 leading-relaxed">{c.description}</p>
+              <div className="h-full rounded-2xl border border-line bg-card p-6 hover:border-primary/40 transition-colors">
+                <c.icon className="h-6 w-6 text-link" aria-hidden />
+                <h3 className="mt-4 text-lg font-semibold text-heading">{c.title}</h3>
+                <p className="mt-2 text-sm text-muted leading-relaxed">{c.description}</p>
               </div>
             </Reveal>
           ))}

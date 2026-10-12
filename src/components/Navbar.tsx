@@ -44,27 +44,35 @@ const Navbar = () => {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || isOpen
-          ? 'bg-black/80 backdrop-blur-xl border-b border-white/5'
+          ? 'bg-page/85 backdrop-blur-xl border-b border-line shadow-sm shadow-ink/5'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-black"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to content
       </a>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main">
         <div className="flex items-center justify-between h-18 md:h-20">
-          <Link href="/" className="flex items-center shrink-0" aria-label="Delix4 home">
+          <Link href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Delix4 home">
             <Image
-              src="/logo.png"
-              alt="Delix4"
-              width={350}
-              height={163}
-              className="h-14 md:h-16 w-auto object-contain"
+              src="/logo-mark.png"
+              alt=""
+              width={463}
+              height={369}
+              className="h-10 md:h-11 w-auto object-contain"
               priority
             />
+            <span className="flex flex-col leading-none">
+              <span className="text-2xl md:text-[1.7rem] font-bold tracking-tight text-heading">
+                Delix<span className="text-primary">4</span>
+              </span>
+              <span className="mt-1 text-[0.55rem] font-medium tracking-[0.3em] text-subtle-fg uppercase">
+                Software Solutions
+              </span>
+            </span>
           </Link>
 
           <ul className="hidden lg:flex items-center gap-1">
@@ -74,7 +82,7 @@ const Navbar = () => {
                   href={link.href}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                   className={`px-3.5 py-2 rounded-full text-sm font-medium transition-colors ${
-                    isActive(link.href) ? 'text-primary' : 'text-gray-300 hover:text-white'
+                    isActive(link.href) ? 'text-link' : 'text-body hover:text-heading'
                   }`}
                 >
                   {link.name}
@@ -86,14 +94,14 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-black hover:bg-yellow-300 transition-colors"
+              className="hidden sm:inline-flex items-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-hover transition-colors"
             >
               Start Your Project
             </Link>
             <button
               onClick={() => setIsOpen((o) => !o)}
               type="button"
-              className="lg:hidden inline-flex items-center justify-center p-2.5 rounded-md text-gray-300 hover:text-primary"
+              className="lg:hidden inline-flex items-center justify-center p-2.5 rounded-md text-body hover:text-link"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
@@ -105,7 +113,7 @@ const Navbar = () => {
       </nav>
 
       {isOpen && (
-        <div id="mobile-menu" className="lg:hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/5 bg-black">
+        <div id="mobile-menu" className="lg:hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line-soft bg-page">
           <ul className="px-4 py-6 space-y-1">
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -114,7 +122,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   aria-current={isActive(link.href) ? 'page' : undefined}
                   className={`block rounded-lg px-4 py-3.5 text-lg font-medium ${
-                    isActive(link.href) ? 'text-primary bg-white/5' : 'text-gray-200 hover:bg-white/5'
+                    isActive(link.href) ? 'text-link bg-subtle' : 'text-body hover:bg-subtle'
                   }`}
                 >
                   {link.name}
@@ -126,7 +134,7 @@ const Navbar = () => {
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
-              className="block w-full rounded-full bg-primary py-3.5 text-center font-semibold text-black"
+              className="block w-full rounded-full bg-primary py-3.5 text-center font-semibold text-white"
             >
               Start Your Project
             </Link>
