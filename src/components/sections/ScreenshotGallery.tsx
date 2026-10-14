@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
 
 type Shot = { src: string; alt: string };
@@ -31,7 +31,7 @@ export default function ScreenshotGallery({ shots }: { shots: Shot[] }) {
   }, [open, step]);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {shots.map((s, i) => (
           <li key={s.src}>
@@ -119,6 +119,6 @@ export default function ScreenshotGallery({ shots }: { shots: Shot[] }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </MotionConfig>
   );
 }

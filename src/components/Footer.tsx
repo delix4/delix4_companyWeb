@@ -19,7 +19,7 @@ const socials = [
   { name: 'Instagram', href: site.social.instagram, icon: Instagram },
 ].filter((s) => s.href);
 
-const linkClass = 'text-muted hover:text-link transition-colors text-sm';
+const linkClass = 'inline-block py-1.5 text-muted hover:text-link transition-colors text-sm';
 
 const Footer = () => {
   return (
@@ -61,7 +61,7 @@ const Footer = () => {
 
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-heading">Services</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1">
               {services.map((s) => (
                 <li key={s.slug}>
                   <Link href={`/services/${s.slug}`} className={linkClass}>
@@ -74,7 +74,7 @@ const Footer = () => {
 
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-heading">Company</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1">
               {companyLinks.map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className={linkClass}>
@@ -87,7 +87,7 @@ const Footer = () => {
 
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-heading">Contact</h2>
-            <ul className="mt-5 space-y-3 text-sm">
+            <ul className="mt-4 space-y-1 text-sm">
               <li>
                 <a href={`mailto:${site.email}`} className={`${linkClass} inline-flex items-center gap-2`}>
                   <Mail className="h-4 w-4" aria-hidden /> {site.email}
@@ -122,12 +122,12 @@ const Footer = () => {
           </p>
           <ul className="flex gap-6 text-sm">
             <li>
-              <Link href="/privacy" className="text-subtle-fg hover:text-heading">
+              <Link href="/privacy" className="inline-block py-1.5 text-subtle-fg hover:text-heading">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="text-subtle-fg hover:text-heading">
+              <Link href="/terms" className="inline-block py-1.5 text-subtle-fg hover:text-heading">
                 Terms &amp; Conditions
               </Link>
             </li>

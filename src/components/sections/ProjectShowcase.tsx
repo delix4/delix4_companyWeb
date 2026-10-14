@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { serviceOptions } from '@/lib/case-studies';
 import CaseStudyCard, { type CardProject } from './CaseStudyCard';
 
@@ -27,7 +27,7 @@ export default function ProjectShowcase({ projects }: { projects: CardProject[] 
         : 'sm:grid-cols-2 lg:grid-cols-3';
 
   return (
-    <div>
+    <MotionConfig reducedMotion="user">
       {filters.length > 2 && (
         <div className="mb-10 flex flex-wrap justify-center gap-2" role="group" aria-label="Filter projects">
           {filters.map((f) => {
@@ -59,7 +59,7 @@ export default function ProjectShowcase({ projects }: { projects: CardProject[] 
       )}
 
       <motion.ul layout className={`grid grid-cols-1 gap-5 ${grid}`}>
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="popLayout" initial={false}>
           {visible.map((p) => (
             <motion.li
               key={p.slug}
@@ -74,6 +74,6 @@ export default function ProjectShowcase({ projects }: { projects: CardProject[] 
           ))}
         </AnimatePresence>
       </motion.ul>
-    </div>
+    </MotionConfig>
   );
 }

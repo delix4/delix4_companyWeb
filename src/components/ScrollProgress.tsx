@@ -1,19 +1,9 @@
-'use client';
-
-import { motion, useScroll, useSpring } from 'framer-motion';
-
+/** Reading-progress bar driven by a CSS scroll timeline (see `.scroll-progress` in globals.css). */
 export default function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   return (
-    <motion.div
-      className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-accent to-primary origin-left z-[100] shadow-[0_0_10px_rgba(37,99,235,0.5)]"
-      style={{ scaleX }}
+    <div
+      aria-hidden
+      className="scroll-progress fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary z-[100] pointer-events-none"
     />
   );
 }

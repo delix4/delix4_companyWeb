@@ -36,26 +36,29 @@ export default function ServicesSection() {
                 ))}
               </ul>
 
-              <h4 className="mt-6 text-xs font-semibold uppercase tracking-wider text-subtle-fg">
-                Business benefits
-              </h4>
-              <ul className="mt-3 space-y-1.5 text-sm text-muted">
-                {service.benefits.map((b) => (
-                  <li key={b.title}>
-                    <span className="text-heading font-medium">{b.title}</span> — {b.description}
-                  </li>
-                ))}
-              </ul>
+              {/* Extra detail is skipped on phones to keep the page short; it is on each service page. */}
+              <div className="hidden sm:block">
+                <h4 className="mt-6 text-xs font-semibold uppercase tracking-wider text-subtle-fg">
+                  Business benefits
+                </h4>
+                <ul className="mt-3 space-y-1.5 text-sm text-muted">
+                  {service.benefits.map((b) => (
+                    <li key={b.title}>
+                      <span className="text-heading font-medium">{b.title}</span> — {b.description}
+                    </li>
+                  ))}
+                </ul>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {service.technologies.slice(0, 5).map((t) => (
-                  <Tag key={t}>{t}</Tag>
-                ))}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {service.technologies.slice(0, 5).map((t) => (
+                    <Tag key={t}>{t}</Tag>
+                  ))}
+                </div>
               </div>
 
               <Link
                 href={`/services/${service.slug}`}
-                className="mt-8 pt-6 border-t border-line inline-flex items-center gap-2 text-link font-medium hover:text-link-hover"
+                className="mt-6 pt-5 sm:mt-8 sm:pt-6 border-t border-line inline-flex items-center gap-2 text-link font-medium hover:text-link-hover"
               >
                 Explore {service.name.toLowerCase()}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />

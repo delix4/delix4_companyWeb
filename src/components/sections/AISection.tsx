@@ -77,17 +77,17 @@ export default async function AISection() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {capabilities.map((c, i) => (
-            <Reveal key={c.title} delay={(i % 2) * 0.08}>
-              <div className="h-full rounded-2xl border border-line bg-card p-6 hover:border-primary/40 transition-colors">
-                <c.icon className="h-6 w-6 text-link" aria-hidden />
-                <h3 className="mt-4 text-lg font-semibold text-heading">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted leading-relaxed">{c.description}</p>
+            <Reveal key={c.title} delay={(i % 2) * 0.08} className="h-full">
+              <div className="h-full rounded-2xl border border-line bg-card p-4 sm:p-6 hover:border-primary/40 transition-colors">
+                <c.icon className="h-5 w-5 sm:h-6 sm:w-6 text-link" aria-hidden />
+                <h3 className="mt-3 sm:mt-4 text-sm sm:text-lg font-semibold text-heading leading-snug">{c.title}</h3>
+                <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-muted leading-relaxed">{c.description}</p>
               </div>
             </Reveal>
           ))}
-          <div className="sm:col-span-2 mt-2">
+          <div className="col-span-2 mt-2">
             <ButtonLink href="/services/ai-development" variant="secondary" arrow>
               Explore AI development
             </ButtonLink>

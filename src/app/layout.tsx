@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Space_Grotesk, JetBrains_Mono } from 'next/font/google';
-import { MotionConfig } from 'framer-motion';
+import { Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -15,14 +14,6 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
-});
-
-// Only used for small decorative code snippets, so it is not preloaded.
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  preload: false,
 });
 
 const defaultTitle = 'Delix4 – Web, Mobile & AI Software Development Company';
@@ -124,22 +115,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased flex flex-col min-h-screen bg-page text-body`}
+        className={`${spaceGrotesk.variable} font-sans antialiased flex flex-col min-h-screen bg-page text-body`}
       >
         <JsonLd data={organizationJsonLd} />
-        <MotionConfig reducedMotion="user">
-          <PublicOnly>
-            <ScrollProgress />
-            <Navbar />
-          </PublicOnly>
-          <main id="main" className="flex-grow">
-            {children}
-          </main>
-          <PublicOnly>
-            <WhatsAppButton />
-            <Footer />
-          </PublicOnly>
-        </MotionConfig>
+        <PublicOnly>
+          <ScrollProgress />
+          <Navbar />
+        </PublicOnly>
+        <main id="main" className="flex-grow">
+          {children}
+        </main>
+        <PublicOnly>
+          <WhatsAppButton />
+          <Footer />
+        </PublicOnly>
       </body>
     </html>
   );

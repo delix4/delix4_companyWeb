@@ -1,27 +1,25 @@
-'use client';
+import type { CSSProperties, ReactNode } from 'react';
 
-import { motion } from 'framer-motion';
-import type { ReactNode } from 'react';
-
-// Subtle fade-up on scroll. Kept as the only animation wrapper so server components stay server-rendered.
+/**
+ * Subtle fade-up as the element scrolls into view, done entirely in CSS (see `.reveal` in
+ * globals.css). Content is visible by default: browsers without scroll-driven animations,
+ * visitors who prefer reduced motion and phones still loading JavaScript all see it at once.
+ */
 export default function Reveal({
   children,
   delay = 0,
-  className,
+  className = '',
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
 }) {
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay }}
+    <div
+      className={`reveal ${className}`}
+      style={delay ? ({ '--reveal-delay': `${Math.round(delay * 100)}%` } as CSSProperties) : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

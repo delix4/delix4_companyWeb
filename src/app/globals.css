@@ -83,7 +83,7 @@
   --color-link-hover: var(--link-hover);
 
   --font-sans: var(--font-sans), sans-serif;
-  --font-mono: var(--font-mono), monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 }
 
 body {
@@ -191,6 +191,47 @@ textarea:focus-visible {
   .animate-float-slow,
   .animate-float-delayed {
     animation: none !important;
+  }
+}
+
+/*
+ * Scroll-driven animations (no JavaScript). Elements are fully visible by default and only
+ * animate where the browser supports scroll timelines, so content never waits for JS to load.
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow-x {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--reveal-delay, 0%)) entry calc(60% + var(--reveal-delay, 0%));
+    }
+  }
+
+  .scroll-progress {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root block);
   }
 }
 
