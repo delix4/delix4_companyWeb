@@ -93,7 +93,7 @@ export default function CaseStudyCard({ project: p }: { project: CardProject }) 
             <span />
           )}
           {p.imageCount > 1 && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-ink/70 px-2 py-1 text-[11px] font-medium text-white backdrop-blur">
+            <span className="inline-flex items-center gap-1 rounded-full bg-ink/80 px-2 py-1 text-[11px] font-medium text-white">
               <Images className="h-3 w-3" aria-hidden /> {p.imageCount}
             </span>
           )}

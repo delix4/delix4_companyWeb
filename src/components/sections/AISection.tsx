@@ -41,7 +41,7 @@ export default async function AISection() {
 
   return (
     <Section id="ai" aria-labelledby="ai-heading" className="overflow-hidden">
-      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-primary/5 rounded-full blur-[120px] pointer-events-none" aria-hidden />
+      <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-[radial-gradient(closest-side,rgba(37,99,235,0.07),transparent)] pointer-events-none" aria-hidden />
       <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-start">
         <div className="lg:sticky lg:top-28">
           <SectionHeading

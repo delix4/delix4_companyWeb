@@ -34,7 +34,7 @@ export default async function WorkSection() {
         ))}
         <Reveal delay={projects.length * 0.06} className="h-full">
           <div className="theme-dark relative h-full min-h-[300px] overflow-hidden rounded-2xl bg-gradient-to-br from-ink via-[#0f2d5c] to-primary p-6 flex flex-col">
-            <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-accent/25 blur-3xl" aria-hidden />
+            <div className="absolute -top-16 -right-16 h-64 w-64 bg-[radial-gradient(closest-side,rgba(0,212,255,0.3),transparent)]" aria-hidden />
             <Image src="/tablogo.png" alt="" width={192} height={192} className="relative h-12 w-12 rounded-xl ring-1 ring-white/15" />
             <h3 className="relative mt-auto text-xl font-bold text-heading">Your project could be next</h3>
             <p className="relative mt-2 text-sm text-body leading-relaxed">

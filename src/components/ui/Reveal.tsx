@@ -17,7 +17,7 @@ export default function Reveal({
   return (
     <div
       className={`reveal ${className}`}
-      style={delay ? ({ '--reveal-delay': `${Math.round(delay * 100)}%` } as CSSProperties) : undefined}
+      style={delay ? ({ '--reveal-delay': `${Math.round(delay * 200)}px` } as CSSProperties) : undefined}
     >
       {children}
     </div>

@@ -13,7 +13,7 @@ export default function CTASection({
     <section className="bg-page py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden theme-dark rounded-3xl bg-gradient-to-br from-ink via-[#0f2d5c] to-primary px-6 py-14 md:px-16 md:py-16 text-center">
-          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[30rem] h-[30rem] bg-accent/20 rounded-full blur-[100px] pointer-events-none" aria-hidden />
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[30rem] h-[30rem] bg-[radial-gradient(closest-side,rgba(0,212,255,0.22),transparent)] pointer-events-none" aria-hidden />
           <h2 className="relative text-3xl md:text-5xl font-bold text-heading tracking-tight text-balance">{title}</h2>
           <p className="relative mt-5 text-lg text-body max-w-2xl mx-auto">{description}</p>
           <div className="relative mt-9 flex flex-col sm:flex-row gap-3 justify-center">

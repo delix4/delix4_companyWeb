@@ -36,7 +36,7 @@ export default function PageHeader({
           })),
         }}
       />
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[50rem] h-[30rem] bg-primary/10 rounded-full blur-[120px] pointer-events-none" aria-hidden />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[50rem] h-[30rem] bg-[radial-gradient(closest-side,rgba(37,99,235,0.12),transparent)] pointer-events-none" aria-hidden />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex flex-wrap items-center gap-1.5 text-sm text-subtle-fg">

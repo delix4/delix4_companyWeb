@@ -38,7 +38,7 @@ export default function CareersPage() {
   return (
     <div className="min-h-screen bg-page pt-28 md:pt-32 pb-20 relative overflow-hidden">
       {/* Background Gradients */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[radial-gradient(closest-side,rgba(37,99,235,0.12),transparent)] pointer-events-none -translate-y-1/2"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Hero Section */}

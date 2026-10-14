@@ -61,7 +61,7 @@ export default function TestimonialCarousel({ testimonials }: { testimonials: Te
       }}
     >
       <div className="relative overflow-hidden rounded-3xl border border-line bg-card shadow-xl shadow-ink/5">
-        <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full bg-accent/10 blur-3xl" aria-hidden />
+        <div className="absolute -top-20 -right-20 h-72 w-72 bg-[radial-gradient(closest-side,rgba(0,212,255,0.12),transparent)]" aria-hidden />
         <Quote className="absolute top-8 left-8 h-14 w-14 text-primary/10" aria-hidden />
 
         {/* Announce changes only when the visitor moves the slider, not on every auto-rotation. */}

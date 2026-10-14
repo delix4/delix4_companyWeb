@@ -10,8 +10,8 @@ export default function HeroSection() {
       className="relative overflow-hidden bg-page pt-32 pb-20 md:pt-40 md:pb-28 lg:min-h-[90vh] flex items-center"
     >
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute -top-1/4 -left-1/4 w-[60vw] h-[60vw] bg-primary/20 rounded-full blur-[120px] opacity-40" />
-        <div className="absolute top-1/4 -right-1/4 w-[50vw] h-[50vw] bg-accent/20 rounded-full blur-[120px] opacity-40" />
+        <div className="absolute -top-1/4 -left-1/4 w-[60vw] h-[60vw] bg-[radial-gradient(closest-side,rgba(37,99,235,0.12),transparent)]" />
+        <div className="absolute top-1/4 -right-1/4 w-[50vw] h-[50vw] bg-[radial-gradient(closest-side,rgba(0,212,255,0.12),transparent)]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(11,31,58,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(11,31,58,0.05)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       </div>
 
@@ -77,10 +77,10 @@ export default function HeroSection() {
 function HeroVisual() {
   return (
     <div className="theme-dark relative mx-auto w-full max-w-lg lg:max-w-none h-[360px] sm:h-[440px] lg:h-[520px] select-none" aria-hidden>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-accent/25 rounded-full blur-[90px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(closest-side,rgba(0,212,255,0.25),transparent)]" />
 
       {/* Browser window */}
-      <div className="absolute top-0 left-0 right-8 sm:right-16 rounded-2xl border border-line bg-page-alt/90 shadow-2xl shadow-ink/25 backdrop-blur overflow-hidden animate-float-slow">
+      <div className="absolute top-0 left-0 right-8 sm:right-16 rounded-2xl border border-line bg-page-alt shadow-2xl shadow-ink/25 overflow-hidden animate-float-slow">
         <div className="flex items-center gap-1.5 px-4 py-3 border-b border-line-soft">
           <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
           <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
@@ -137,7 +137,7 @@ function HeroVisual() {
       </div>
 
       {/* AI card */}
-      <div className="absolute bottom-10 left-0 sm:left-4 w-56 rounded-2xl border border-line bg-page/80 backdrop-blur-xl p-4 shadow-2xl animate-float-delayed">
+      <div className="absolute bottom-10 left-0 sm:left-4 w-56 rounded-2xl border border-line bg-page p-4 shadow-2xl animate-float-delayed">
         <div className="flex items-center gap-2 mb-3">
           <div className="p-1.5 rounded-lg bg-primary/15 text-link">
             <Brain className="h-4 w-4" />

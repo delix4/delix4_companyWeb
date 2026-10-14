@@ -147,16 +147,19 @@ textarea:focus-visible {
   }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
+/* Floating mock-ups only on larger screens: on phones the constant repainting delays the page. */
+@media (min-width: 768px) {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
 
-.animate-float-slow {
-  animation: float 8s ease-in-out infinite;
-}
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
 
-.animate-float-delayed {
-  animation: float 7s ease-in-out 1.5s infinite;
+  .animate-float-delayed {
+    animation: float 7s ease-in-out 1.5s infinite;
+  }
 }
 
 @keyframes marquee {
@@ -225,7 +228,9 @@ textarea:focus-visible {
     .reveal {
       animation: reveal-up linear both;
       animation-timeline: view();
-      animation-range: entry calc(5% + var(--reveal-delay, 0%)) entry calc(60% + var(--reveal-delay, 0%));
+      /* Fixed distances, not percentages: tall cards finish fading within the bottom ~140px of
+         the screen instead of staying faint until most of the card has scrolled in. */
+      animation-range: entry var(--reveal-delay, 0px) entry calc(140px + var(--reveal-delay, 0px));
     }
   }
 
